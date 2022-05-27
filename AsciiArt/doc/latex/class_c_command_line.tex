@@ -1,0 +1,85 @@
+\doxysection{CCommand\+Line Class Reference}
+\label{class_c_command_line}\index{CCommandLine@{CCommandLine}}
+
+
+Parses command line\+: -\/h for help, -\/a for ascii file.  
+
+
+
+
+{\ttfamily \#include $<$cmdline.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{class_c_command_line_adf6c97ba65782159343c8a90afd8528f}} 
+typedef std\+::vector$<$ std\+::string $>$ {\bfseries vec\+Strings}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ CCommand\+Line} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Creates a new \doxyref{CCommand\+Line}{p.}{class_c_command_line} object. \end{DoxyCompactList}\item 
+bool \textbf{ parse} ()
+\begin{DoxyCompactList}\small\item\em Parses the input followed after \char`\"{}./file\+\_\+name\char`\"{} for further features. \end{DoxyCompactList}\item 
+const vec\+Strings \& \textbf{ get\+Image\+File\+Names} () const
+\begin{DoxyCompactList}\small\item\em Get Image filenames from command line. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Parses command line\+: -\/h for help, -\/a for ascii file. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_c_command_line_ad276be4575d243dab200eae61f2d9ed7}} 
+\index{CCommandLine@{CCommandLine}!CCommandLine@{CCommandLine}}
+\index{CCommandLine@{CCommandLine}!CCommandLine@{CCommandLine}}
+\doxysubsubsection{CCommandLine()}
+{\footnotesize\ttfamily CCommand\+Line\+::\+CCommand\+Line (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a new \doxyref{CCommand\+Line}{p.}{class_c_command_line} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & Number of arguments. \\
+\hline
+{\em argv} & Array of arguments. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_c_command_line_a4e5d6090adf5eb8a9c9aee1455a9703e}} 
+\index{CCommandLine@{CCommandLine}!getImageFileNames@{getImageFileNames}}
+\index{getImageFileNames@{getImageFileNames}!CCommandLine@{CCommandLine}}
+\doxysubsubsection{getImageFileNames()}
+{\footnotesize\ttfamily const vec\+Strings \& CCommand\+Line\+::get\+Image\+File\+Names (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get Image filenames from command line. 
+
+\begin{DoxyReturn}{Returns}
+const vec\+Strings\& vector of image filenames. 
+\end{DoxyReturn}
+\mbox{\label{class_c_command_line_a61c613feff2bd94abcdc8b8a40df0d4a}} 
+\index{CCommandLine@{CCommandLine}!parse@{parse}}
+\index{parse@{parse}!CCommandLine@{CCommandLine}}
+\doxysubsubsection{parse()}
+{\footnotesize\ttfamily bool CCommand\+Line\+::parse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parses the input followed after \char`\"{}./file\+\_\+name\char`\"{} for further features. 
+
+\begin{DoxyReturn}{Returns}
+true If successful. 
+
+false If invalid arguments. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/filipkresl/\+Desktop/\+CVUT/repo/\+BI-\/\+PA2/semestralka/\textbf{ cmdline.\+hpp}\end{DoxyCompactItemize}

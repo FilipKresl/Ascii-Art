@@ -1,0 +1,45 @@
+\doxysection{triangle\+\_\+test.\+hpp}
+\label{triangle__test_8hpp_source}\index{/Users/filipkresl/Desktop/CVUT/repo/BI-\/PA2/semestralka/triangle\_test.hpp@{/Users/filipkresl/Desktop/CVUT/repo/BI-\/PA2/semestralka/triangle\_test.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{4 \textcolor{keyword}{class }Triangle}
+\DoxyCodeLine{5 \{}
+\DoxyCodeLine{6 \textcolor{keyword}{public}:}
+\DoxyCodeLine{13     Triangle();}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{24     Triangle(\textcolor{keyword}{const} \textcolor{keywordtype}{double} a, \textcolor{keyword}{const} \textcolor{keywordtype}{double} b, \textcolor{keyword}{const} \textcolor{keywordtype}{double} c);}
+\DoxyCodeLine{25     }
+\DoxyCodeLine{33     Triangle(\textcolor{keyword}{const} Triangle\& triangle);}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{39     \textcolor{keywordtype}{double} getSideA() \textcolor{keyword}{const};}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{45     \textcolor{keywordtype}{double} getSideB() \textcolor{keyword}{const};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{51     \textcolor{keywordtype}{double} getSideC() \textcolor{keyword}{const};}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{57     std::vector<Triangle> rotations() \textcolor{keyword}{const};}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{64     Triangle\& operator=(\textcolor{keyword}{const} Triangle\& triangle);}
+\DoxyCodeLine{65     }
+\DoxyCodeLine{71     \textcolor{keywordtype}{bool} operator==(\textcolor{keyword}{const} Triangle\& triangle) \textcolor{keyword}{const};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{78     \textcolor{keywordtype}{bool} isEquivalent(\textcolor{keyword}{const} Triangle\& triangle) \textcolor{keyword}{const};}
+\DoxyCodeLine{84     \textcolor{keywordtype}{bool} isSimilar(\textcolor{keyword}{const} Triangle\& triangle) \textcolor{keyword}{const};}
+\DoxyCodeLine{89     \textcolor{keywordtype}{bool} isEquilateral() \textcolor{keyword}{const};}
+\DoxyCodeLine{94     \textcolor{keywordtype}{bool} isIsosceles() \textcolor{keyword}{const};}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{100     \textcolor{keywordtype}{double} perimeter() \textcolor{keyword}{const};}
+\DoxyCodeLine{105     \textcolor{keywordtype}{double} area() \textcolor{keyword}{const};}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{111     Triangle scale(\textcolor{keyword}{const} \textcolor{keywordtype}{double} factor) \textcolor{keyword}{const};}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113 \textcolor{keyword}{private}:}
+\DoxyCodeLine{117     \textcolor{keywordtype}{double} mA, mB, mC;}
+\DoxyCodeLine{118 \};}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{127 Triangle createTriangle(\textcolor{keyword}{const} \textcolor{keywordtype}{double} a, \textcolor{keyword}{const} \textcolor{keywordtype}{double} b, \textcolor{keyword}{const} \textcolor{keywordtype}{double} c);}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{137 \textcolor{keywordtype}{bool} isTriangle(\textcolor{keyword}{const} \textcolor{keywordtype}{double} a, \textcolor{keyword}{const} \textcolor{keywordtype}{double} b, \textcolor{keyword}{const} \textcolor{keywordtype}{double} c);}
+
+\end{DoxyCode}

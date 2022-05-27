@@ -1,0 +1,119 @@
+\doxysection{gallery.\+hpp}
+\label{gallery_8hpp_source}\index{/Users/filipkresl/Desktop/CVUT/repo/BI-\/PA2/semestralka/gallery.hpp@{/Users/filipkresl/Desktop/CVUT/repo/BI-\/PA2/semestralka/gallery.hpp}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}image.hpp"{}}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{typedef} std::vector< CImage * > vecImages;}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{20 \textcolor{keyword}{class }CGallery}
+\DoxyCodeLine{21 \{}
+\DoxyCodeLine{22 \textcolor{keyword}{public}:}
+\DoxyCodeLine{27     \textcolor{keyword}{virtual} \string~CGallery ( )}
+\DoxyCodeLine{28     \{}
+\DoxyCodeLine{29         clear ();        }
+\DoxyCodeLine{30     \}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{36     \textcolor{keywordtype}{void} addImages ( \textcolor{keyword}{const} std::vector<std::string> \& imageNames )}
+\DoxyCodeLine{37     \{}
+\DoxyCodeLine{38         \textcolor{keywordflow}{for} ( \textcolor{keywordtype}{size\_t} i = 0, size = imageNames . size(); i < size; i++)}
+\DoxyCodeLine{39         \{}
+\DoxyCodeLine{40             std::string fileName = imageNames[ i ];}
+\DoxyCodeLine{41             std::string fileExt = getExt ( fileName );}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43             \textcolor{keywordflow}{if} ( fileExt == \textcolor{stringliteral}{"{}bmp"{}} )}
+\DoxyCodeLine{44             \{}
+\DoxyCodeLine{45                 \textcolor{comment}{// tbd -\/ add an instace of CBmpImage}}
+\DoxyCodeLine{46             \}}
+\DoxyCodeLine{47             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( fileExt == \textcolor{stringliteral}{"{}tga"{}} )}
+\DoxyCodeLine{48             \{}
+\DoxyCodeLine{49                 \textcolor{comment}{// tbd -\/ add an instace of CTgaImage}}
+\DoxyCodeLine{50             \}}
+\DoxyCodeLine{51             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( fileExt == \textcolor{stringliteral}{"{}raw"{}} )}
+\DoxyCodeLine{52             \{}
+\DoxyCodeLine{53                 \textcolor{comment}{// tbd -\/ add an instace of CRawImage}}
+\DoxyCodeLine{54             \}}
+\DoxyCodeLine{55             \textcolor{keywordflow}{else} }
+\DoxyCodeLine{56             \{}
+\DoxyCodeLine{57                 \textcolor{keywordflow}{throw} std::invalid\_argument ( \textcolor{stringliteral}{"{}unknown image extension in the command line"{}} );}
+\DoxyCodeLine{58             \}}
+\DoxyCodeLine{59         \}   }
+\DoxyCodeLine{60     \}}
+\DoxyCodeLine{68     \textcolor{keywordtype}{bool} erase ( \textcolor{keywordtype}{size\_t} atIndex )}
+\DoxyCodeLine{69     \{}
+\DoxyCodeLine{70         \textcolor{keywordflow}{if} ( m\_images.size() >= 0 \&\& atIndex <= m\_images.size() -\/ 1 )}
+\DoxyCodeLine{71         \{}
+\DoxyCodeLine{72             \textcolor{keyword}{delete} m\_images [ atIndex ];}
+\DoxyCodeLine{73             m\_images.erase ( m\_images.begin() + atIndex );}
+\DoxyCodeLine{74             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{75         \}}
+\DoxyCodeLine{76         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{77     \}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{82     \textcolor{keywordtype}{void} clear ( )}
+\DoxyCodeLine{83     \{}
+\DoxyCodeLine{84         \textcolor{keywordflow}{for} ( \textcolor{keywordtype}{size\_t} i = 0, size = m\_images.size(); i < size; i++)}
+\DoxyCodeLine{85         \{}
+\DoxyCodeLine{86             \textcolor{keyword}{delete} m\_images [ i ];}
+\DoxyCodeLine{87         \}}
+\DoxyCodeLine{88         m\_images.clear ();}
+\DoxyCodeLine{89     \}}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{97     \textcolor{keywordtype}{bool} moveForwards ( \textcolor{keywordtype}{size\_t} atIndex )}
+\DoxyCodeLine{98     \{}
+\DoxyCodeLine{99         \textcolor{comment}{// if ( m\_images.size() >= 2 \&\& atIndex < m\_images.size() -\/ 1 )}}
+\DoxyCodeLine{100         \textcolor{comment}{// \{}}
+\DoxyCodeLine{101         \textcolor{comment}{//     move ( m\_images, atIndex, atIndex + 1 );}}
+\DoxyCodeLine{102         \textcolor{comment}{//     return true;}}
+\DoxyCodeLine{103         \textcolor{comment}{// \}}}
+\DoxyCodeLine{104         \textcolor{keywordtype}{size\_t} size = m\_images.size();}
+\DoxyCodeLine{105         \textcolor{keywordflow}{if} ( m\_images.size() > 1 )}
+\DoxyCodeLine{106         \{}
+\DoxyCodeLine{107             move ( m\_images, atIndex, ( atIndex + 1 ) \% size );}
+\DoxyCodeLine{108             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{109         \}}
+\DoxyCodeLine{110         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{111     \}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{119     \textcolor{keywordtype}{bool} moveBackwards ( \textcolor{keywordtype}{size\_t} atIndex )}
+\DoxyCodeLine{120     \{}
+\DoxyCodeLine{121         \textcolor{keywordtype}{size\_t} size = m\_images.size();}
+\DoxyCodeLine{122         \textcolor{keywordflow}{if} ( size > 1 )}
+\DoxyCodeLine{123         \{}
+\DoxyCodeLine{124             move ( m\_images, atIndex, ( atIndex -\/ 1 + size ) \% size );}
+\DoxyCodeLine{125             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{126         \}}
+\DoxyCodeLine{127         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{128     \}}
+\DoxyCodeLine{129 \textcolor{keyword}{private}:}
+\DoxyCodeLine{137     \textcolor{keyword}{template} <\textcolor{keyword}{typename} t> \textcolor{keywordtype}{void} move(std::vector<t>\& v, \textcolor{keywordtype}{size\_t} oldIndex, \textcolor{keywordtype}{size\_t} newIndex)}
+\DoxyCodeLine{138     \{}
+\DoxyCodeLine{139         \textcolor{keywordflow}{if} (oldIndex > newIndex)}
+\DoxyCodeLine{140             std::rotate(v.rend() -\/ oldIndex -\/ 1, v.rend() -\/ oldIndex, v.rend() -\/ newIndex);}
+\DoxyCodeLine{141         \textcolor{keywordflow}{else}        }
+\DoxyCodeLine{142             std::rotate(v.begin() + oldIndex, v.begin() + oldIndex + 1, v.begin() + newIndex + 1);}
+\DoxyCodeLine{143     \}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{150     std::string getExt( std::string fileName )}
+\DoxyCodeLine{151     \{}
+\DoxyCodeLine{152         \textcolor{keywordtype}{size\_t} i = fileName.rfind ( \textcolor{charliteral}{'.'}, fileName.length () );}
+\DoxyCodeLine{153         \textcolor{keywordflow}{if} ( i != std::string::npos ) }
+\DoxyCodeLine{154         \{}
+\DoxyCodeLine{155             \textcolor{keywordflow}{return} fileName.substr( i + 1, fileName.length() -\/ i );}
+\DoxyCodeLine{156         \}}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158         \textcolor{keywordflow}{return} std::string ( \textcolor{stringliteral}{"{}"{}} );}
+\DoxyCodeLine{159     \}}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161 \textcolor{keyword}{private}:}
+\DoxyCodeLine{162     vecImages m\_images;}
+\DoxyCodeLine{163 \};}
+
+\end{DoxyCode}

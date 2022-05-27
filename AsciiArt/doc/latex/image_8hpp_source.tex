@@ -1,0 +1,94 @@
+\doxysection{image.\+hpp}
+\label{image_8hpp_source}\index{/Users/filipkresl/Desktop/CVUT/repo/BI-\/PA2/semestralka/image.hpp@{/Users/filipkresl/Desktop/CVUT/repo/BI-\/PA2/semestralka/image.hpp}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{16 \textcolor{keyword}{union }t\_pixel }
+\DoxyCodeLine{17 \{}
+\DoxyCodeLine{18     std::uint32\_t color;}
+\DoxyCodeLine{19     \textcolor{keyword}{struct }}
+\DoxyCodeLine{20     \{}
+\DoxyCodeLine{21         std::uint8\_t b, g, r, a;}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     \} rgba;}
+\DoxyCodeLine{24 \};}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{29 \textcolor{keyword}{class }CImage}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31 \textcolor{keyword}{public}:}
+\DoxyCodeLine{38     CImage ( \textcolor{keywordtype}{size\_t} width, \textcolor{keywordtype}{size\_t} height )}
+\DoxyCodeLine{39     \{}
+\DoxyCodeLine{40         init ( width, height );}
+\DoxyCodeLine{41     \}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{47     CImage ( \textcolor{keywordtype}{string} filename )}
+\DoxyCodeLine{48     \{}
+\DoxyCodeLine{49     \}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{56     \textcolor{keywordtype}{void} init ( \textcolor{keywordtype}{int} width, \textcolor{keywordtype}{int} height )}
+\DoxyCodeLine{57     \{}
+\DoxyCodeLine{58         m\_width = width;}
+\DoxyCodeLine{59         m\_height = height;}
+\DoxyCodeLine{60         m\_bitsPerPixel = 32;}
+\DoxyCodeLine{61         m\_pixels.resize ( width * height );    }
+\DoxyCodeLine{62     \}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{69      \textcolor{keywordtype}{void} resize ( \textcolor{keywordtype}{size\_t} newWidth, \textcolor{keywordtype}{size\_t} newHeight )}
+\DoxyCodeLine{70     \{}
+\DoxyCodeLine{71         \textcolor{comment}{// tbd}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73         m\_width = newWidth;}
+\DoxyCodeLine{74         m\_height = newHeight;}
+\DoxyCodeLine{75     \}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{80     \textcolor{keywordtype}{void} invert ()}
+\DoxyCodeLine{81     \{}
+\DoxyCodeLine{82         std::vector<t\_pixel> tmpPixels = m\_pixels;}
+\DoxyCodeLine{83         \textcolor{keywordflow}{for} ( \textcolor{keywordtype}{size\_t} y = 0; y < m\_height; y++ )}
+\DoxyCodeLine{84         \{}
+\DoxyCodeLine{85             \textcolor{keywordflow}{for} ( \textcolor{keywordtype}{size\_t} x = 0; x < m\_width; x++ )}
+\DoxyCodeLine{86             \{}
+\DoxyCodeLine{87                 \textcolor{keywordtype}{int} index = y * m\_width + x; }
+\DoxyCodeLine{88                 m\_pixels[index].rgba.r = 255 -\/ tmpPixels[index].rgba.r;}
+\DoxyCodeLine{89                 m\_pixels[index].rgba.g = 255 -\/ tmpPixels[index].rgba.g;}
+\DoxyCodeLine{90                 m\_pixels[index].rgba.b = 255 -\/ tmpPixels[index].rgba.b;}
+\DoxyCodeLine{91                 m\_pixels[index].rgba.a = tmpPixels[index].rgba.a;}
+\DoxyCodeLine{92             \}}
+\DoxyCodeLine{93         \}}
+\DoxyCodeLine{94     \}}
+\DoxyCodeLine{98     \textcolor{keywordtype}{void} flipVertical ()}
+\DoxyCodeLine{99     \{}
+\DoxyCodeLine{100         std::vector<t\_pixel> tmpPixels = m\_pixels;}
+\DoxyCodeLine{101         \textcolor{keywordflow}{for} ( \textcolor{keywordtype}{size\_t} y = 0; y < m\_height; y++ )}
+\DoxyCodeLine{102         \{}
+\DoxyCodeLine{103             \textcolor{keywordflow}{for} ( \textcolor{keywordtype}{size\_t} x = 0; x < m\_width; x++ )}
+\DoxyCodeLine{104             \{}
+\DoxyCodeLine{105                 m\_pixels[y * m\_width + x] = tmpPixels[(m\_height -\/ 1 -\/ y) * m\_width + x];}
+\DoxyCodeLine{106             \}}
+\DoxyCodeLine{107         \}}
+\DoxyCodeLine{108     \}}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{113     \textcolor{keywordtype}{void} flipHorizontal ()}
+\DoxyCodeLine{114     \{}
+\DoxyCodeLine{115         std::vector<t\_pixel> tmpPixels = m\_pixels;}
+\DoxyCodeLine{116         \textcolor{keywordflow}{for} ( \textcolor{keywordtype}{size\_t} y = 0; y < m\_height; y++ )}
+\DoxyCodeLine{117         \{}
+\DoxyCodeLine{118             \textcolor{keywordflow}{for} ( \textcolor{keywordtype}{size\_t} x = 0; x < m\_width; x++ )}
+\DoxyCodeLine{119             \{}
+\DoxyCodeLine{120                 m\_pixels[y * m\_width + x] = tmpPixels[y * m\_width + m\_width -\/ 1 -\/ x];}
+\DoxyCodeLine{121             \}}
+\DoxyCodeLine{122         \}}
+\DoxyCodeLine{123     \}}
+\DoxyCodeLine{130 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{131     \textcolor{keywordtype}{size\_t}          m\_width;}
+\DoxyCodeLine{132     \textcolor{keywordtype}{size\_t}          m\_height;}
+\DoxyCodeLine{133     \textcolor{keywordtype}{short} \textcolor{keywordtype}{int}       m\_bitsPerPixel;}
+\DoxyCodeLine{134     vector<t\_pixel> m\_pixels;}
+\DoxyCodeLine{135 \};}
+
+\end{DoxyCode}

@@ -1,0 +1,57 @@
+originální zadání
+ASCII art
+
+Váš program:
+
+z jednoho až n obrázků běžného formátu (BMP/SVG/RAW/TGA, ...) načte data a ty validně zobrazí v ASCII (odstíny šedi)
+ze souboru načte definovaný ASCII přechod
+umožňuje alespoň tři jednoduché operace (zesvětlení/ztmavení obrázku, vymazání, konvoluce, negativ, ...)
+umožnuje "spuštění" animace v případě více načtených obrázků a triviální editaci animace na útovní framů (např. mazání framů, seřazení za sebou, ...)
+Program bude umět pracovat s minimálně jedním obrázkovým formátem.
+
+Program bude mít jednoduché možnosti přehrávání animace (zastavit, spustit, zobrazit konkrétní frame, ...).
+
+Kde lze využít polymorfismus? (doporučené)
+
+Nástroje pro manipulaci a jejich efekty, sady znaků, ...
+Formáty vstupu: BMP, SVG, RAW, ...
+Různé styly ASCII vykreslení
+Přehrávač: obrázek (jen zobrazí), sekvence (přehraje více obrázků)
+Uživatelské rozhraní: konzole, ncurses, SDL, OpenGL (různé varianty), ...
+
+------------------------------------------------------------------------------------------------
+
+Moje plánovaná implementace
+
+ASCII-art
+
+Výsledný program umožní načítání různých typů grafických souborů, konkrétně BMP, TGA a RAW, 
+následně jednotlivé pixely pomocí konverzního algoritmu převede na ascii znaky a ty za pomoci ncurses 
+vytiskne do terminálu.
+
+Program bude nabízet několik podob výsledného outputu. 
+Např.:
+    černé ascii znaky na bílé ploše za pomoci větší a nebo menší defaultní sady znaků,
+    zobrazení pouze jedné barevné složky obrázku,
+    vertikální nebo horizontální převrácení,
+    barevná inverze, zjasnění nebo ztmavení obrázku a další barevné operace,
+    vkládání obrázků do galerie, následné přehrávání sekvence a její editace:
+        nastavování rychlosti, 
+        invertování směru přehrávání, 
+        pauzování, 
+        měnění pořadí obrázků, ...
+
+    Uživatel dále bude mít možnost částečně program ovládat skrze zadané argumenty při spuštění,
+    např:
+        vytištění helpu,
+        zadání souboru se sérií znaků, pomocí kterých se má daný ascii art vygenerovat
+        a nebo zobrazení obrázku v různých textových podobách (hexa, ascii art, ...).
+    
+Polymorfismus bude v programu využit na několika místech, 
+např.:
+    při načítání různých grafických souborů implementovaných třídami odvozenými z CImage,
+    různé grafické výstupy do textového terminálu implementované v třídách inheritovaných z třídy COutput.
+
+Program je částečně rozpracovaný, nejdůležitější třídy jsou přiložené.
+
+Dokumentace je k dispozici v ./doc/html/index.html

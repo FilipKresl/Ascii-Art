@@ -1,0 +1,122 @@
+\doxysection{CGallery Class Reference}
+\label{class_c_gallery}\index{CGallery@{CGallery}}
+
+
+Contains multiple images and methods to manipulate with them.  
+
+
+
+
+{\ttfamily \#include $<$gallery.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \textbf{ $\sim$\+CGallery} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \textbf{ add\+Images} (const std\+::vector$<$ std\+::string $>$ \&image\+Names)
+\begin{DoxyCompactList}\small\item\em Enables adding different types of images to gallery (using polymorphism). \end{DoxyCompactList}\item 
+bool \textbf{ erase} (size\+\_\+t at\+Index)
+\item 
+\mbox{\label{class_c_gallery_a7fd8c294cc19542458cae8d24d040a58}} 
+void {\bfseries clear} ()
+\begin{DoxyCompactList}\small\item\em Clears the whole image array (gallery) and frees the allocated memory. \end{DoxyCompactList}\item 
+bool \textbf{ move\+Forwards} (size\+\_\+t at\+Index)
+\begin{DoxyCompactList}\small\item\em Moves the image to the front of gallery. \end{DoxyCompactList}\item 
+bool \textbf{ move\+Backwards} (size\+\_\+t at\+Index)
+\begin{DoxyCompactList}\small\item\em Moves the image to the back of gallery. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains multiple images and methods to manipulate with them. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_c_gallery_a2c70aacc38921ae8ab4a5c0dd4809a88}} 
+\index{CGallery@{CGallery}!````~CGallery@{$\sim$CGallery}}
+\index{````~CGallery@{$\sim$CGallery}!CGallery@{CGallery}}
+\doxysubsubsection{$\sim$CGallery()}
+{\footnotesize\ttfamily virtual CGallery\+::$\sim$\+CGallery (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Constructor. 
+
+Create a new \doxyref{CGallery}{p.}{class_c_gallery} object. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_c_gallery_aad8da792f2dc3db3f8d45cddcf4699e2}} 
+\index{CGallery@{CGallery}!addImages@{addImages}}
+\index{addImages@{addImages}!CGallery@{CGallery}}
+\doxysubsubsection{addImages()}
+{\footnotesize\ttfamily void CGallery\+::add\+Images (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{image\+Names }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enables adding different types of images to gallery (using polymorphism). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em image\+Names} & Vector of names of the images to be added. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{class_c_gallery_abecd74a9dfb77f0d8f345ad4159f8f0b}} 
+\index{CGallery@{CGallery}!erase@{erase}}
+\index{erase@{erase}!CGallery@{CGallery}}
+\doxysubsubsection{erase()}
+{\footnotesize\ttfamily bool CGallery\+::erase (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{at\+Index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em at\+Index} & Index to the image to be erased. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If erasion successful. 
+
+false If either empty gallery or index out of range 
+\end{DoxyReturn}
+\mbox{\label{class_c_gallery_a46360c950d4f02ae7af6360e8d9f74bb}} 
+\index{CGallery@{CGallery}!moveBackwards@{moveBackwards}}
+\index{moveBackwards@{moveBackwards}!CGallery@{CGallery}}
+\doxysubsubsection{moveBackwards()}
+{\footnotesize\ttfamily bool CGallery\+::move\+Backwards (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{at\+Index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Moves the image to the back of gallery. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em at\+Index} & Index to the image that should be moved. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If successful. 
+
+false If there is less than 2 instances in the gallery. 
+\end{DoxyReturn}
+\mbox{\label{class_c_gallery_afb250d58c76ba9d221a94e652d0609f7}} 
+\index{CGallery@{CGallery}!moveForwards@{moveForwards}}
+\index{moveForwards@{moveForwards}!CGallery@{CGallery}}
+\doxysubsubsection{moveForwards()}
+{\footnotesize\ttfamily bool CGallery\+::move\+Forwards (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{at\+Index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Moves the image to the front of gallery. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em at\+Index} & Index to the image that should be moved. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If successful. 
+
+false If there is less than 2 instances in the gallery. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/filipkresl/\+Desktop/\+CVUT/repo/\+BI-\/\+PA2/semestralka/\textbf{ gallery.\+hpp}\end{DoxyCompactItemize}

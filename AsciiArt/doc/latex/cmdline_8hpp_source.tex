@@ -1,0 +1,78 @@
+\doxysection{cmdline.\+hpp}
+\label{cmdline_8hpp_source}\index{/Users/filipkresl/Desktop/CVUT/repo/BI-\/PA2/semestralka/cmdline.hpp@{/Users/filipkresl/Desktop/CVUT/repo/BI-\/PA2/semestralka/cmdline.hpp}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{18 \textcolor{keyword}{class }CCommandLine }
+\DoxyCodeLine{19 \{}
+\DoxyCodeLine{20 \textcolor{keyword}{public}:}
+\DoxyCodeLine{21     \textcolor{keyword}{typedef} std::vector<std::string> vecStrings;}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keyword}{public}:}
+\DoxyCodeLine{29     CCommandLine ( \textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} ** argv )}
+\DoxyCodeLine{30     \{}
+\DoxyCodeLine{31         m\_argc = argc;}
+\DoxyCodeLine{32         m\_argv = argv;}
+\DoxyCodeLine{33     \}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{40     \textcolor{keywordtype}{bool} parse ()}
+\DoxyCodeLine{41     \{}
+\DoxyCodeLine{42         \textcolor{comment}{// tbd}}
+\DoxyCodeLine{43         \textcolor{keywordflow}{if} ( ( arg == \textcolor{stringliteral}{"{}-\/h"{}} ) || ( arg == \textcolor{stringliteral}{"{}-\/-\/help"{}} ) ) }
+\DoxyCodeLine{44             \{}
+\DoxyCodeLine{45                 showUsage(m\_argv[0]);}
+\DoxyCodeLine{46                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{47             \}}
+\DoxyCodeLine{48         \textcolor{comment}{// tbd}}
+\DoxyCodeLine{49         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( ( arg == \textcolor{stringliteral}{"{}-\/a"{}} ) || ( arg == \textcolor{stringliteral}{"{}-\/-\/ascii"{}} ) ) }
+\DoxyCodeLine{50         \{}
+\DoxyCodeLine{51             \textcolor{keywordflow}{if} (i + 1 < m\_argc)}
+\DoxyCodeLine{52             \{ }
+\DoxyCodeLine{53                 m\_asciiFileName = m\_argv [ ++ i ]; \textcolor{comment}{// Increment 'i' so we don't get the argument as the next argv[i].}}
+\DoxyCodeLine{54             \} }
+\DoxyCodeLine{55             \textcolor{keywordflow}{else} \textcolor{comment}{// wrong arguments }}
+\DoxyCodeLine{56             \{ }
+\DoxyCodeLine{57                 std::cerr << \textcolor{stringliteral}{"{}-\/-\/ascii option requires one argument specifying a text file with ascii characters"{}} << std::endl;}
+\DoxyCodeLine{58                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{59             \}  }
+\DoxyCodeLine{60         \}}
+\DoxyCodeLine{61         \textcolor{comment}{// tbd}}
+\DoxyCodeLine{62         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{63     \}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65     \textcolor{comment}{// const std::string \&  getAsciiFileName () const  \{ return m\_asciiFileName; \} }}
+\DoxyCodeLine{70 \textcolor{comment}{}    \textcolor{keyword}{const} vecStrings \& getImageFileNames ()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} m\_imageFileNames; \}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 \textcolor{keyword}{private}:}
+\DoxyCodeLine{76     \textcolor{keywordtype}{bool} readAsciiFile ()}
+\DoxyCodeLine{77     \{}
+\DoxyCodeLine{78         \textcolor{comment}{// tbd}}
+\DoxyCodeLine{79     \}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{84     \textcolor{keyword}{static} \textcolor{keywordtype}{void} showUsage ( std::string name )}
+\DoxyCodeLine{85     \{}
+\DoxyCodeLine{86         std::cerr << \textcolor{stringliteral}{"{}USAGE: "{}} << name << \textcolor{stringliteral}{"{} [options] files...\(\backslash\)n\(\backslash\)n"{}}}
+\DoxyCodeLine{87                 << \textcolor{stringliteral}{"{}OPTIONS:\(\backslash\)n"{}}}
+\DoxyCodeLine{88                 << \textcolor{stringliteral}{"{}\(\backslash\)t-\/h,-\/-\/help\(\backslash\)t\(\backslash\)tShow this help message\(\backslash\)n"{}}}
+\DoxyCodeLine{89                 << \textcolor{stringliteral}{"{}\(\backslash\)t-\/a,-\/-\/ascii <file>\(\backslash\)tLoad text file with ASCII characters used to render the image\(\backslash\)n\(\backslash\)n"{}}}
+\DoxyCodeLine{90                 << \textcolor{stringliteral}{"{}FILES: "{}}}
+\DoxyCodeLine{91                 << \textcolor{stringliteral}{"{}\(\backslash\)tone or more BMP or TGA files or wildcards; only images with 24 or 32 bits per pixel are supported\(\backslash\)n"{}}}
+\DoxyCodeLine{92                 << std::endl;}
+\DoxyCodeLine{93     \}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     std::string   m\_ext;}
+\DoxyCodeLine{96     \textcolor{keywordtype}{int}           m\_argc;}
+\DoxyCodeLine{97     \textcolor{keywordtype}{char}       ** m\_argv;}
+\DoxyCodeLine{98     std::string   m\_asciiFileName; }
+\DoxyCodeLine{99     vecStrings    m\_imageFileNames;}
+\DoxyCodeLine{100     std::string   m\_asciiChars;}
+\DoxyCodeLine{101 \};}
+
+\end{DoxyCode}

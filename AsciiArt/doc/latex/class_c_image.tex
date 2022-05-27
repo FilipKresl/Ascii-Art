@@ -1,0 +1,135 @@
+\doxysection{CImage Class Reference}
+\label{class_c_image}\index{CImage@{CImage}}
+
+
+Keeps in memory data about BMP/\+TGA/\+RAW/... images.  
+
+
+
+
+{\ttfamily \#include $<$image.\+hpp$>$}
+
+Inheritance diagram for CImage\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_c_image}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ CImage} (size\+\_\+t width, size\+\_\+t height)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\textbf{ CImage} (string filename)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \textbf{ init} (int width, int height)
+\begin{DoxyCompactList}\small\item\em Initializes image, called in constructor. \end{DoxyCompactList}\item 
+void \textbf{ resize} (size\+\_\+t new\+Width, size\+\_\+t new\+Height)
+\begin{DoxyCompactList}\small\item\em Resizes the image to fit different scales. \end{DoxyCompactList}\item 
+\mbox{\label{class_c_image_ad9bcec6aeb8033137d30b5c386512308}} 
+void {\bfseries invert} ()
+\begin{DoxyCompactList}\small\item\em Inverts the color scheme of image by storing complements of rgba values to 0xff. \end{DoxyCompactList}\item 
+\mbox{\label{class_c_image_aff204264b17ba61798dbe6f17db5421c}} 
+void {\bfseries flip\+Vertical} ()
+\begin{DoxyCompactList}\small\item\em Flips the image by Y axis. \end{DoxyCompactList}\item 
+\mbox{\label{class_c_image_a1118adebb300239798df5db1508cebd2}} 
+void {\bfseries flip\+Horizontal} ()
+\begin{DoxyCompactList}\small\item\em Flips the image by X axis. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \textbf{ m\+\_\+width}
+\item 
+\mbox{\label{class_c_image_a8ba6ea6a82f3bdce8f19cfd3d3e58264}} 
+size\+\_\+t {\bfseries m\+\_\+height}
+\item 
+\mbox{\label{class_c_image_ad86038d1d630e2fceb5942afa58f6345}} 
+short int {\bfseries m\+\_\+bits\+Per\+Pixel}
+\item 
+\mbox{\label{class_c_image_a4156f58d47292577404de8317a3cbb6c}} 
+vector$<$ \textbf{ t\+\_\+pixel} $>$ {\bfseries m\+\_\+pixels}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Keeps in memory data about BMP/\+TGA/\+RAW/... images. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_c_image_ae46f36561c27d541adce1c9be47506b4}} 
+\index{CImage@{CImage}!CImage@{CImage}}
+\index{CImage@{CImage}!CImage@{CImage}}
+\doxysubsubsection{CImage()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily CImage\+::\+CImage (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{width,  }\item[{size\+\_\+t}]{height }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+Create a new \doxyref{CImage}{p.}{class_c_image} object. 
+\begin{DoxyParams}{Parameters}
+{\em width} & The width of the image. \\
+\hline
+{\em height} & The height of the image. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{class_c_image_a8667048724d14ccc0dd3bd3be96ed2b1}} 
+\index{CImage@{CImage}!CImage@{CImage}}
+\index{CImage@{CImage}!CImage@{CImage}}
+\doxysubsubsection{CImage()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily CImage\+::\+CImage (\begin{DoxyParamCaption}\item[{string}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+Will be overloaded by derived classes. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_c_image_a1f2e4c00544cd07806150f2b3491f820}} 
+\index{CImage@{CImage}!init@{init}}
+\index{init@{init}!CImage@{CImage}}
+\doxysubsubsection{init()}
+{\footnotesize\ttfamily void CImage\+::init (\begin{DoxyParamCaption}\item[{int}]{width,  }\item[{int}]{height }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes image, called in constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & The width of the image. \\
+\hline
+{\em height} & The height of the image. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{class_c_image_a618c1902cc45a7aa1e0c644990b74516}} 
+\index{CImage@{CImage}!resize@{resize}}
+\index{resize@{resize}!CImage@{CImage}}
+\doxysubsubsection{resize()}
+{\footnotesize\ttfamily void CImage\+::resize (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{new\+Width,  }\item[{size\+\_\+t}]{new\+Height }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resizes the image to fit different scales. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Width} & New width of the image. \\
+\hline
+{\em new\+Height} & New height of the image. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_c_image_abcffb7cde4a573a7e7232a011fe986eb}} 
+\index{CImage@{CImage}!m\_width@{m\_width}}
+\index{m\_width@{m\_width}!CImage@{CImage}}
+\doxysubsubsection{m\_width}
+{\footnotesize\ttfamily size\+\_\+t CImage\+::m\+\_\+width\hspace{0.3cm}{\ttfamily [protected]}}
+
+Width of image. Height of image. How many bits per pixel (using 32 because of the rgba format). Vector of struct \doxyref{t\+\_\+pixel}{p.}{uniont__pixel}, used as a conteiner for keeping in memory the image. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/filipkresl/\+Desktop/\+CVUT/repo/\+BI-\/\+PA2/semestralka/\textbf{ image.\+hpp}\end{DoxyCompactItemize}

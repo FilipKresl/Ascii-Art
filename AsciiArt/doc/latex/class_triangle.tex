@@ -1,0 +1,308 @@
+\doxysection{Triangle Class Reference}
+\label{class_triangle}\index{Triangle@{Triangle}}
+
+
+\doxyref{Triangle}{p.}{class_triangle} class used for triangle manipulations.  
+
+
+
+
+{\ttfamily \#include $<$triangle\+\_\+test.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Triangle} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\textbf{ Triangle} (const double a, const double b, const double c)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\textbf{ Triangle} (const \textbf{ Triangle} \&triangle)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+double \textbf{ get\+SideA} () const
+\begin{DoxyCompactList}\small\item\em Get the length of side a. \end{DoxyCompactList}\item 
+double \textbf{ get\+SideB} () const
+\begin{DoxyCompactList}\small\item\em Get the length of side b. \end{DoxyCompactList}\item 
+double \textbf{ get\+SideC} () const
+\begin{DoxyCompactList}\small\item\em Get the length of side c. \end{DoxyCompactList}\item 
+std\+::vector$<$ \textbf{ Triangle} $>$ \textbf{ rotations} () const
+\begin{DoxyCompactList}\small\item\em Get a vector of the \doxyref{Triangle}{p.}{class_triangle} objects whose side lengths have been rotated. \end{DoxyCompactList}\item 
+\textbf{ Triangle} \& \textbf{ operator=} (const \textbf{ Triangle} \&triangle)
+\begin{DoxyCompactList}\small\item\em Assignment overloading. \end{DoxyCompactList}\item 
+bool \textbf{ operator==} (const \textbf{ Triangle} \&triangle) const
+\begin{DoxyCompactList}\small\item\em Equivalence overloading. \end{DoxyCompactList}\item 
+bool \textbf{ is\+Equivalent} (const \textbf{ Triangle} \&triangle) const
+\begin{DoxyCompactList}\small\item\em Determine if the \doxyref{Triangle}{p.}{class_triangle} object is equivalent to the other. \end{DoxyCompactList}\item 
+bool \textbf{ is\+Similar} (const \textbf{ Triangle} \&triangle) const
+\begin{DoxyCompactList}\small\item\em Determine if the \doxyref{Triangle}{p.}{class_triangle} object is similar to the other. \end{DoxyCompactList}\item 
+bool \textbf{ is\+Equilateral} () const
+\begin{DoxyCompactList}\small\item\em Determine if the \doxyref{Triangle}{p.}{class_triangle} object is quilateral. \end{DoxyCompactList}\item 
+bool \textbf{ is\+Isosceles} () const
+\begin{DoxyCompactList}\small\item\em Determine if the \doxyref{Triangle}{p.}{class_triangle} object is isosceles. \end{DoxyCompactList}\item 
+double \textbf{ perimeter} () const
+\begin{DoxyCompactList}\small\item\em Get the perimeter of the \doxyref{Triangle}{p.}{class_triangle} object. \end{DoxyCompactList}\item 
+double \textbf{ area} () const
+\begin{DoxyCompactList}\small\item\em Get the area of the \doxyref{Triangle}{p.}{class_triangle} object. \end{DoxyCompactList}\item 
+\textbf{ Triangle} \textbf{ scale} (const double factor) const
+\begin{DoxyCompactList}\small\item\em Create a new scaled \doxyref{Triangle}{p.}{class_triangle} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxyref{Triangle}{p.}{class_triangle} class used for triangle manipulations. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_triangle_aaefe4ed500c07918d30c6f0e286332c5}} 
+\index{Triangle@{Triangle}!Triangle@{Triangle}}
+\index{Triangle@{Triangle}!Triangle@{Triangle}}
+\doxysubsubsection{Triangle()\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Triangle\+::\+Triangle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+Create a new \doxyref{Triangle}{p.}{class_triangle} object of side lengths 1, 1, and 1. \begin{DoxySeeAlso}{See also}
+\doxyref{Triangle(const double a, const double b, const double c)}{p.}{class_triangle_a5332fcc26dbcd3c0bc2752b6e0b51cef} 
+
+\doxyref{Triangle(const Triangle\& triangle)}{p.}{class_triangle_a889893fe34e2eb7121082b86199d5628} 
+\end{DoxySeeAlso}
+\mbox{\label{class_triangle_a5332fcc26dbcd3c0bc2752b6e0b51cef}} 
+\index{Triangle@{Triangle}!Triangle@{Triangle}}
+\index{Triangle@{Triangle}!Triangle@{Triangle}}
+\doxysubsubsection{Triangle()\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Triangle\+::\+Triangle (\begin{DoxyParamCaption}\item[{const double}]{a,  }\item[{const double}]{b,  }\item[{const double}]{c }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+Create a new \doxyref{Triangle}{p.}{class_triangle} object from side lengths. 
+\begin{DoxyParams}{Parameters}
+{\em a} & The Length of triangle side a. \\
+\hline
+{\em b} & The Length of triangle side b. \\
+\hline
+{\em c} & The Length of triangle side c. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxyref{Triangle()}{p.}{class_triangle_aaefe4ed500c07918d30c6f0e286332c5} 
+
+\doxyref{Triangle(const Triangle\& triangle)}{p.}{class_triangle_a889893fe34e2eb7121082b86199d5628} 
+\end{DoxySeeAlso}
+\mbox{\label{class_triangle_a889893fe34e2eb7121082b86199d5628}} 
+\index{Triangle@{Triangle}!Triangle@{Triangle}}
+\index{Triangle@{Triangle}!Triangle@{Triangle}}
+\doxysubsubsection{Triangle()\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Triangle\+::\+Triangle (\begin{DoxyParamCaption}\item[{const \textbf{ Triangle} \&}]{triangle }\end{DoxyParamCaption})}
+
+
+
+Copy constructor. 
+
+Construct a new \doxyref{Triangle}{p.}{class_triangle} object from another \doxyref{Triangle}{p.}{class_triangle} object. 
+\begin{DoxyParams}{Parameters}
+{\em triangle} & Another \doxyref{Triangle}{p.}{class_triangle} object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxyref{Triangle()}{p.}{class_triangle_aaefe4ed500c07918d30c6f0e286332c5} 
+
+\doxyref{Triangle(const double a, const double b, const double c)}{p.}{class_triangle_a5332fcc26dbcd3c0bc2752b6e0b51cef} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_triangle_a5b86d43152f84325da7c657650e1f3f1}} 
+\index{Triangle@{Triangle}!area@{area}}
+\index{area@{area}!Triangle@{Triangle}}
+\doxysubsubsection{area()}
+{\footnotesize\ttfamily double Triangle\+::area (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the area of the \doxyref{Triangle}{p.}{class_triangle} object. 
+
+\begin{DoxyReturn}{Returns}
+The area of the \doxyref{Triangle}{p.}{class_triangle} object. 
+\end{DoxyReturn}
+\mbox{\label{class_triangle_a2a6b6a954f261f9c3bc9c5d34501acdf}} 
+\index{Triangle@{Triangle}!getSideA@{getSideA}}
+\index{getSideA@{getSideA}!Triangle@{Triangle}}
+\doxysubsubsection{getSideA()}
+{\footnotesize\ttfamily double Triangle\+::get\+SideA (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the length of side a. 
+
+\begin{DoxyReturn}{Returns}
+The length of side a. 
+\end{DoxyReturn}
+\mbox{\label{class_triangle_afa3c0e7433e78f52bd21aae845a6baec}} 
+\index{Triangle@{Triangle}!getSideB@{getSideB}}
+\index{getSideB@{getSideB}!Triangle@{Triangle}}
+\doxysubsubsection{getSideB()}
+{\footnotesize\ttfamily double Triangle\+::get\+SideB (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the length of side b. 
+
+\begin{DoxyReturn}{Returns}
+The length of side b. 
+\end{DoxyReturn}
+\mbox{\label{class_triangle_a7664e9374e95ac3c3a76f7425550a97a}} 
+\index{Triangle@{Triangle}!getSideC@{getSideC}}
+\index{getSideC@{getSideC}!Triangle@{Triangle}}
+\doxysubsubsection{getSideC()}
+{\footnotesize\ttfamily double Triangle\+::get\+SideC (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the length of side c. 
+
+\begin{DoxyReturn}{Returns}
+The length of side c. 
+\end{DoxyReturn}
+\mbox{\label{class_triangle_a3b47b0fa2d13916d40be78eca30be2ed}} 
+\index{Triangle@{Triangle}!isEquilateral@{isEquilateral}}
+\index{isEquilateral@{isEquilateral}!Triangle@{Triangle}}
+\doxysubsubsection{isEquilateral()}
+{\footnotesize\ttfamily bool Triangle\+::is\+Equilateral (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Determine if the \doxyref{Triangle}{p.}{class_triangle} object is quilateral. 
+
+\begin{DoxyReturn}{Returns}
+Whether the \doxyref{Triangle}{p.}{class_triangle} objects is equilateral. 
+\end{DoxyReturn}
+\mbox{\label{class_triangle_a19d9b79553057d4c750124288c6658e6}} 
+\index{Triangle@{Triangle}!isEquivalent@{isEquivalent}}
+\index{isEquivalent@{isEquivalent}!Triangle@{Triangle}}
+\doxysubsubsection{isEquivalent()}
+{\footnotesize\ttfamily bool Triangle\+::is\+Equivalent (\begin{DoxyParamCaption}\item[{const \textbf{ Triangle} \&}]{triangle }\end{DoxyParamCaption}) const}
+
+
+
+Determine if the \doxyref{Triangle}{p.}{class_triangle} object is equivalent to the other. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em triangle} & Another \doxyref{Triangle}{p.}{class_triangle} object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether the two \doxyref{Triangle}{p.}{class_triangle} objects are the same. 
+\end{DoxyReturn}
+\mbox{\label{class_triangle_a958c404a9c4fc0bdeb5028a993872c1f}} 
+\index{Triangle@{Triangle}!isIsosceles@{isIsosceles}}
+\index{isIsosceles@{isIsosceles}!Triangle@{Triangle}}
+\doxysubsubsection{isIsosceles()}
+{\footnotesize\ttfamily bool Triangle\+::is\+Isosceles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Determine if the \doxyref{Triangle}{p.}{class_triangle} object is isosceles. 
+
+\begin{DoxyReturn}{Returns}
+Whether the \doxyref{Triangle}{p.}{class_triangle} objects is isosceles. 
+\end{DoxyReturn}
+\mbox{\label{class_triangle_a5afdde8c423a068faca9bd0b6edfc7d7}} 
+\index{Triangle@{Triangle}!isSimilar@{isSimilar}}
+\index{isSimilar@{isSimilar}!Triangle@{Triangle}}
+\doxysubsubsection{isSimilar()}
+{\footnotesize\ttfamily bool Triangle\+::is\+Similar (\begin{DoxyParamCaption}\item[{const \textbf{ Triangle} \&}]{triangle }\end{DoxyParamCaption}) const}
+
+
+
+Determine if the \doxyref{Triangle}{p.}{class_triangle} object is similar to the other. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em triangle} & Another \doxyref{Triangle}{p.}{class_triangle} object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether the two \doxyref{Triangle}{p.}{class_triangle} objects are similar. 
+\end{DoxyReturn}
+\mbox{\label{class_triangle_aae57b61e09898f54256a83e76acfe502}} 
+\index{Triangle@{Triangle}!operator=@{operator=}}
+\index{operator=@{operator=}!Triangle@{Triangle}}
+\doxysubsubsection{operator=()}
+{\footnotesize\ttfamily \textbf{ Triangle} \& Triangle\+::operator= (\begin{DoxyParamCaption}\item[{const \textbf{ Triangle} \&}]{triangle }\end{DoxyParamCaption})}
+
+
+
+Assignment overloading. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em triangle} & Another \doxyref{Triangle}{p.}{class_triangle} object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The reference to the current \doxyref{Triangle}{p.}{class_triangle} object. 
+\end{DoxyReturn}
+\mbox{\label{class_triangle_a641b73f762f785fd9518f9e4fb90ec3f}} 
+\index{Triangle@{Triangle}!operator==@{operator==}}
+\index{operator==@{operator==}!Triangle@{Triangle}}
+\doxysubsubsection{operator==()}
+{\footnotesize\ttfamily bool Triangle\+::operator== (\begin{DoxyParamCaption}\item[{const \textbf{ Triangle} \&}]{triangle }\end{DoxyParamCaption}) const}
+
+
+
+Equivalence overloading. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em triangle} & another \doxyref{Triangle}{p.}{class_triangle} object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether the two \doxyref{Triangle}{p.}{class_triangle} objects are the same. 
+\end{DoxyReturn}
+\mbox{\label{class_triangle_a9d7fa1b4f79bf3a515c816a8b6486038}} 
+\index{Triangle@{Triangle}!perimeter@{perimeter}}
+\index{perimeter@{perimeter}!Triangle@{Triangle}}
+\doxysubsubsection{perimeter()}
+{\footnotesize\ttfamily double Triangle\+::perimeter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the perimeter of the \doxyref{Triangle}{p.}{class_triangle} object. 
+
+\begin{DoxyReturn}{Returns}
+The perimeter of the \doxyref{Triangle}{p.}{class_triangle} object. 
+\end{DoxyReturn}
+\mbox{\label{class_triangle_ada92ea538d46c8d52026bce2007abf05}} 
+\index{Triangle@{Triangle}!rotations@{rotations}}
+\index{rotations@{rotations}!Triangle@{Triangle}}
+\doxysubsubsection{rotations()}
+{\footnotesize\ttfamily std\+::vector$<$ \textbf{ Triangle} $>$ Triangle\+::rotations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get a vector of the \doxyref{Triangle}{p.}{class_triangle} objects whose side lengths have been rotated. 
+
+\begin{DoxyReturn}{Returns}
+A vector of \doxyref{Triangle}{p.}{class_triangle} objects. 
+\end{DoxyReturn}
+\mbox{\label{class_triangle_ae961e3afe3a01a23aa48baa55f15a0fa}} 
+\index{Triangle@{Triangle}!scale@{scale}}
+\index{scale@{scale}!Triangle@{Triangle}}
+\doxysubsubsection{scale()}
+{\footnotesize\ttfamily \textbf{ Triangle} Triangle\+::scale (\begin{DoxyParamCaption}\item[{const double}]{factor }\end{DoxyParamCaption}) const}
+
+
+
+Create a new scaled \doxyref{Triangle}{p.}{class_triangle} object. 
+
+\begin{DoxyReturn}{Returns}
+A new scaled \doxyref{Triangle}{p.}{class_triangle} object. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/filipkresl/\+Desktop/\+CVUT/repo/\+BI-\/\+PA2/semestralka/triangle\+\_\+test.\+hpp\end{DoxyCompactItemize}
