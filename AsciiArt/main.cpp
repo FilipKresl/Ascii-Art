@@ -35,6 +35,7 @@ public:
         fillPixels();
         fillPallete();
         convertGray();
+        stretch();
     }
     ~CImage() {}
     void loadInput( string & filepath )
@@ -89,21 +90,17 @@ public:
     }
     void fillPallete()
     {
-        m_pallete.clear();
-        m_pallete.push_back( '.' );
-        m_pallete.push_back( ',' );
-        m_pallete.push_back( 'i' );
-        m_pallete.push_back( 'w' );
-        m_pallete.push_back( '2' );
-        m_pallete.push_back( '8' );
-        m_pallete.push_back( '@' );
+        // m_pallete = " .v5P@";
+        m_pallete = "@8P0DOCwocui;:,. ";
+        // m_pallete = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
     }
     void convertGray()
     {
         int len = m_pixels.size();
         for (int i = 0; i < len; i++)
         {
-            int sum = ( m_pixels[i].b + m_pixels[i].g + m_pixels[i].r ) / 3;
+            // int sum = (float) m_pixels[i].b * 0  + (float) m_pixels[i].g * 0.9+ (float) m_pixels[i].r * 0.1 ;
+            int sum = (float) m_pixels[i].b * 0.114  + (float) m_pixels[i].g * 0.587+ (float) m_pixels[i].r * 0.299 ;
             m_grayVec.push_back( sum );
         } 
     }
@@ -128,6 +125,49 @@ public:
             }
             cout << endl;
         }   
+    }
+    void stretch()
+    {
+        // vector<uint8_t> tmp;
+        // int s = m_grayVec.size();
+        // for (int i = 0; i < s; i++)
+        // {
+        //     tmp.push_back( m_grayVec[i] );
+        //     tmp.push_back( m_grayVec[i] );
+        // }
+        // m_width *= 2;
+        // m_grayVec = tmp;        
+        vector<uint8_t> tmp;
+        for (int h = 0; h < m_height-1; h+=2)
+        {
+            for (int w = 0; w < m_width; w++)
+            {
+                tmp.push_back( (m_grayVec[h*m_width + w] + m_grayVec[(h+1)*m_width + w]) / 2 );
+            }
+            
+        }
+        
+        m_height /= 2;
+        m_grayVec = tmp;        
+    }
+    void minimalise()
+    {
+        vector<uint8_t> tmp;
+        for (int h = 0; h < m_height-1; h+=2)
+        {
+            for (int w = 0; w < m_width-1; w+=2)
+            {
+                int sum = (m_grayVec[h*m_width + w] + m_grayVec[h*m_width + w + 1] + m_grayVec[(h+1)*m_width + w] + m_grayVec[(h+1)*m_width + w + 1]) / 4;
+                tmp.push_back( sum );
+            }
+        }
+        m_grayVec = tmp;
+        m_height /= 2;
+        m_width /= 2;
+    }
+    void maximalise()
+    {
+
     }
     void dumpPixels()
     {
@@ -169,38 +209,28 @@ public:
         cout << "      _\\/\\\\\\_______\\/\\\\\\__/\\\\\\______\\//\\\\\\___\\////\\\\\\\\\\\\\\\\\\\\\\_____\\/\\\\\\_________\\/\\\\\\_____          \n";
         cout << "       _\\///________\\///____\\///////////___________\\/////////__\\///////////__\\///////////__                                      \n";   
     }
+
 private:
     int             m_fileSize;
     int             m_width;
     int             m_height;
-    vector<uint8_t> m_buffer; // storing input
+    vector<uint8_t> m_buffer; // storing raw input
     int             m_index; // where to read from m_buffer
-    vector<rgba>    m_pixels;
+    vector<rgba>    m_pixels; // storing rgba pixels
     int             m_paddingAmount;
-    vector<char>    m_pallete;
-    vector<uint8_t> m_grayVec;
+    string          m_pallete; // storing available char for output
+    vector<uint8_t> m_grayVec; // storing 8bit average for each pixel
 };
 
 int main ( int argc, char** argv )
 {   
     D cout << "start" << endl;
-    string path = "img/10x3.bmp";
+    // string path = "img/beruska-lo.bmp";
+    string path = "img/cat.bmp";
     CImage img( path );
-    // D img.dumpPixels();
-    // D img.dumpPallete();
-    // D img.dumpGrayVec();
     img.printArt();
 
     D cout << "OK" << endl;
 
-    cout << "_____/\\\\\\\\\\\\\\\\\\________/\\\\\\\\\\\\\\\\\\\\\\__________/\\\\\\\\\\\\\\\\\\__/\\\\\\\\\\\\\\\\\\\\\\__/\\\\\\\\\\\\\\\\\\\\\\_\n";
-    cout << " ___/\\\\\\\\\\\\\\\\\\\\\\\\\\____/\\\\\\/////////\\\\\\_____/\\\\\\////////__\\/////\\\\\\///__\\/////\\\\\\///__                    \n";
-    cout << "  __/\\\\\\/////////\\\\\\__\\//\\\\\\______\\///____/\\\\\\/_______________\\/\\\\\\_________\\/\\\\\\_____                           \n";
-    cout << "   _\\/\\\\\\_______\\/\\\\\\___\\////\\\\\\__________/\\\\\\_________________\\/\\\\\\_________\\/\\\\\\_____                         \n";
-    cout << "    _\\/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\______\\////\\\\\\______\\/\\\\\\_________________\\/\\\\\\_________\\/\\\\\\_____               \n";
-    cout << "     _\\/\\\\\\/////////\\\\\\_________\\////\\\\\\___\\//\\\\\\________________\\/\\\\\\_________\\/\\\\\\_____                       \n";
-    cout << "      _\\/\\\\\\_______\\/\\\\\\__/\\\\\\______\\//\\\\\\___\\////\\\\\\\\\\\\\\\\\\\\\\_____\\/\\\\\\_________\\/\\\\\\_____          \n";
-    cout << "       _\\///________\\///____\\///////////___________\\/////////__\\///////////__\\///////////__                                      \n";
-    
     return 0;
 }
