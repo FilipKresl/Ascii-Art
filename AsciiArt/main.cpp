@@ -3,18 +3,14 @@
  * @brief Main entry point. 
  */
 
-// #include "cmdline.hpp"
-// #include "gallery.hpp"
-// #include "image.hpp"
-// #include "bmpimage.hpp"
-// #include "output.hpp"
-// #include "asciiart.hpp"
-
 #include <iostream>
 #include <string>
 #include <vector>
+#include <list>
 #include <iomanip>
 #include <fstream>
+#include <assert.h>
+#include <ncurses.h>
 
 #define D if(0)
 
@@ -33,7 +29,6 @@ public:
         loadInput( filepath );
         init();
         fillPixels();
-        fillPallete();
         convertGray();
         stretch();
     }
@@ -88,12 +83,6 @@ public:
         m_index += m_paddingAmount;
         D cout << "check 2" << endl;
     }
-    void fillPallete()
-    {
-        // m_pallete = " .v5P@";
-        m_pallete = "@8P0DOCwocui;:,. ";
-        // m_pallete = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
-    }
     void convertGray()
     {
         int len = m_pixels.size();
@@ -104,39 +93,8 @@ public:
             m_grayVec.push_back( sum );
         } 
     }
-    char convertAscii( int index )
-    {
-        int charSize = 256;
-        int palSize = m_pallete.size();
-        double res = ( (double) m_grayVec[index] / charSize ) * palSize;
-        return m_pallete[res];
-    }
-    void printArt()
-    {
-        int index = 0;
-        // int index = i*m_width + k;
-        cout << "ASCII - ART" << endl;
-        for (int i = 0; i < m_height; i++)
-        {
-            for (int k = 0; k < m_width; k++)
-            {
-                cout << convertAscii( index );
-                index ++;
-            }
-            cout << endl;
-        }   
-    }
     void stretch()
-    {
-        // vector<uint8_t> tmp;
-        // int s = m_grayVec.size();
-        // for (int i = 0; i < s; i++)
-        // {
-        //     tmp.push_back( m_grayVec[i] );
-        //     tmp.push_back( m_grayVec[i] );
-        // }
-        // m_width *= 2;
-        // m_grayVec = tmp;        
+    {       
         vector<uint8_t> tmp;
         for (int h = 0; h < m_height-1; h+=2)
         {
@@ -180,15 +138,6 @@ public:
             cout << endl;
         }
     }
-    void dumpPallete()
-    {
-        cout << "pallete >";
-        for (int i = 0; i < m_pallete.size(); i++)
-        {
-            cout << m_pallete[i];
-        }
-        cout << "<" << endl;  
-    }
     void dumpGrayVec()
     {
         cout << "grayVec:" << endl;
@@ -198,18 +147,18 @@ public:
         }
         cout << endl; 
     }
-    void printHeadline()
+    int getHeight()
     {
-        cout << "_____/\\\\\\\\\\\\\\\\\\________/\\\\\\\\\\\\\\\\\\\\\\__________/\\\\\\\\\\\\\\\\\\__/\\\\\\\\\\\\\\\\\\\\\\__/\\\\\\\\\\\\\\\\\\\\\\_\n";
-        cout << " ___/\\\\\\\\\\\\\\\\\\\\\\\\\\____/\\\\\\/////////\\\\\\_____/\\\\\\////////__\\/////\\\\\\///__\\/////\\\\\\///__                    \n";
-        cout << "  __/\\\\\\/////////\\\\\\__\\//\\\\\\______\\///____/\\\\\\/_______________\\/\\\\\\_________\\/\\\\\\_____                           \n";
-        cout << "   _\\/\\\\\\_______\\/\\\\\\___\\////\\\\\\__________/\\\\\\_________________\\/\\\\\\_________\\/\\\\\\_____                         \n";
-        cout << "    _\\/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\______\\////\\\\\\______\\/\\\\\\_________________\\/\\\\\\_________\\/\\\\\\_____               \n";
-        cout << "     _\\/\\\\\\/////////\\\\\\_________\\////\\\\\\___\\//\\\\\\________________\\/\\\\\\_________\\/\\\\\\_____                       \n";
-        cout << "      _\\/\\\\\\_______\\/\\\\\\__/\\\\\\______\\//\\\\\\___\\////\\\\\\\\\\\\\\\\\\\\\\_____\\/\\\\\\_________\\/\\\\\\_____          \n";
-        cout << "       _\\///________\\///____\\///////////___________\\/////////__\\///////////__\\///////////__                                      \n";   
+        return m_height;
     }
-
+    int getWidth()
+    {
+        return m_width;
+    }
+    vector<uint8_t> getGrayVec()
+    {
+        return m_grayVec;
+    }
 private:
     int             m_fileSize;
     int             m_width;
@@ -218,19 +167,191 @@ private:
     int             m_index; // where to read from m_buffer
     vector<rgba>    m_pixels; // storing rgba pixels
     int             m_paddingAmount;
-    string          m_pallete; // storing available char for output
     vector<uint8_t> m_grayVec; // storing 8bit average for each pixel
 };
 
+class CGallery
+{
+public:
+    CGallery( vector<string> & rpaths) 
+    {
+        for (int i = 0; i < rpaths.size(); i++)
+        {
+            CImage * p = new CImage( rpaths[i] );
+            m_gallery.push_back( p );
+        }
+        m_index = 0;
+    }
+    ~CGallery() 
+    {
+        for (int i = 0; i < m_gallery.size(); i++)
+        {
+            delete m_gallery[i];
+        }
+    }
+    CImage * getImage()
+    {
+        return m_gallery[m_index];
+    }
+    void incIndex()
+    {
+        m_index ++;
+        if ( m_index >= m_gallery.size() )
+            m_index = 0;
+    }
+
+private:
+    int             m_index;
+    vector<CImage*> m_gallery;
+};
+
+class COutput
+{
+public:
+    COutput() 
+    {
+        initscr();
+        cbreak();
+        noecho();
+        clear();
+
+        // printMenu();
+        fillPallete();
+    }
+    ~COutput() {}
+    // void printMenu()
+    // {
+    // }
+    void fillPallete()
+    {
+        m_palletes.clear();
+        m_palletes.push_back( " ." );
+        m_palletes.push_back( ". " );
+        m_palletes.push_back( " .u0" );
+        m_palletes.push_back( "0;. " );
+        m_palletes.push_back( " .;uoC0P@" );
+        m_palletes.push_back( "@P0Cou;. " );
+        m_palletes.push_back( "  .,:;iucowCOD0P8@" );
+        m_palletes.push_back( "@8P0DOCwocui;:,.  " );
+        m_pal = 0;
+    }
+    void invertPallete()
+    {
+        if ( m_pal % 2 == 0 )
+            m_pal ++;
+        else
+            m_pal --;
+    }
+    void biggerPallete()
+    {
+        if ( m_pal + 2 < m_palletes.size() ) 
+            m_pal += 2;
+    }
+    void smallerPallete()
+    {
+        if ( m_pal - 2 >= 0 ) 
+            m_pal -= 2;
+    }
+    char convertAscii( int index )
+    {
+        int charSize = 256;
+        int palSize = m_palletes[m_pal].size();
+        int res = ( (double) m_grays[index] / charSize ) * palSize;
+        assert ( res >= 0 && res < palSize );
+        return m_palletes[m_pal][res];
+    }
+    void printArt( CImage * pimg )
+    {
+        m_grays     = pimg->getGrayVec();
+        int height  = pimg->getHeight();
+        int width   = pimg->getWidth();
+        int index   = 0;
+        for (int i = 0; i < height; i++)
+        {
+            for (int k = 0; k < width; k++)
+            {
+                char c = convertAscii( index );
+                mvaddch ( i, k, c );
+                index ++;
+            }
+            mvaddch( i, width, '\n' );
+        }   
+        refresh();
+    }
+
+private:
+    vector<string>  m_palletes; // storing available char for output
+    int             m_pal; 
+    vector<uint8_t> m_grays;
+};
+// class CCommandLine
+// {
+// public:
+//     CCommandLine( int argc, char** argv )
+//     {
+//     }
+// private:
+// };
+// clear; g++ -Wall -pedantic main.cpp && ./a.out
+// clear; g++ -Wall -pedantic main.cpp -lncurses && ./a.out
+
 int main ( int argc, char** argv )
 {   
-    D cout << "start" << endl;
-    // string path = "img/beruska-lo.bmp";
-    string path = "img/cat.bmp";
-    CImage img( path );
-    img.printArt();
+    vector<string> paths;
+    paths.push_back( "img/img0.bmp" );
+    paths.push_back( "img/img1.bmp" );
+    paths.push_back( "img/img2.bmp" );
+    paths.push_back( "img/img3.bmp" );
+    paths.push_back( "img/img4.bmp" );
+    paths.push_back( "img/img5.bmp" );
+    paths.push_back( "img/img6.bmp" );
+    paths.push_back( "img/img7.bmp" );
+    CGallery gal ( paths );
 
-    D cout << "OK" << endl;
+    // CImage img ( path );
+    
+    COutput out;
+    out.printArt ( gal.getImage() );
+
+    bool bContinue = true;
+    while ( bContinue )
+    {
+        char c = tolower ( getch() );
+        switch ( c )
+        {
+        case 'i':
+            out.invertPallete();
+            clear();
+            out.printArt( gal.getImage() );
+            break;
+        case 'p':
+            out.biggerPallete();
+            clear();
+            out.printArt( gal.getImage() );
+            break;
+        case 'o':
+            out.smallerPallete();
+            clear();
+            out.printArt( gal.getImage() );
+            break;
+        case 'm':
+            gal.incIndex();
+            out.printArt( gal.getImage() );
+            break;
+        case 'n':
+            // previous
+            break;
+        case 'q':
+            bContinue = false;
+            break;
+        default:
+            refresh();
+            break;
+        }
+    }
+
+    getch();
+    endwin();
 
     return 0;
 }
