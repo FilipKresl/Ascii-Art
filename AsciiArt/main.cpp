@@ -16,6 +16,7 @@
 #include <math.h>
 #include <assert.h>
 #include <ncurses.h>
+#include <thread>
 
 #include "CCommandLine.hpp"
 #include "CImage.hpp"
@@ -43,12 +44,22 @@ int main ( int argc, char** argv )
     pOutVec[ outIndex ]->readImg ( gal.getImage() );
 
     bool bContinue = true;
+    bool bPlaying = false;
     while ( bContinue )
     {
+        if ( bPlaying ) // play automatically
+        {
+            nodelay(stdscr, TRUE);
+            gal.incIndex();
+            pOutVec[ outIndex ]->readImg ( gal.getImage() );
+            this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+        else            // stops playing
+            nodelay(stdscr, FALSE);
+
         char c = tolower ( getch() );
         switch ( c )
         {
-
         // change the Ascii pallete
         case 'i':
             pOutVec[ outIndex ]->invertPallete();
@@ -122,6 +133,12 @@ int main ( int argc, char** argv )
             gal.moveImgForward();
             pOutVec[ outIndex ]->readImg( gal.getImage() );
             break;
+        // play / stop
+        case 'u':
+            bPlaying = ! bPlaying;
+            break;
+        
+
 
         // quit
         case 'q':
