@@ -94,7 +94,7 @@ public:
     {
         fstream f ( filepath, ios::in | ios::binary );
         if ( !f.is_open () ) 
-            throw invalid_argument ( "Error: File Not Found." );
+            throw invalid_argument ( "File Not Found" );
         
         int fileHeaderSize = 14;
         vector<uint8_t> fileHeader ( fileHeaderSize );
@@ -148,7 +148,7 @@ class CImageTGA : public CImage
     {
         fstream f ( filepath, ios::in | ios::binary );
         if ( !f.is_open () ) 
-            throw invalid_argument ( "Error: File Not Found." );
+            throw invalid_argument ( "File Not Found" );
         
         f.seekg ( 0, ios::beg );
         streampos beg = f.tellg();
@@ -160,16 +160,9 @@ class CImageTGA : public CImage
         f.read ( reinterpret_cast<char*> ( m_buffer.data() ), m_fileSize);
         f.close();
 
-        // vector<uint8_t> fileHeader ( fileHeaderSize );
-        // f.read ( reinterpret_cast<char*> ( fileHeader.data() ), fileHeaderSize);
         m_width    = m_buffer[12] + ( m_buffer[13] << 8 );
         m_height   = m_buffer[14] + ( m_buffer[15] << 8 );
         m_index    = 18;
-
-        // f.seekg ( 0, ios::beg );
-        // m_buffer.resize(m_fileSize);
-        // f.read ( reinterpret_cast<char*> ( m_buffer.data() ), m_fileSize);
-        // f.close();
 
         init( bdoStretch );
         D dumpPixels();
@@ -185,8 +178,6 @@ class CImageTGA : public CImage
     }
     virtual void fillPixels ()
     {
-        cout << "size = " << m_fileSize << endl;
-        cout << "m_width = " << m_width << " m_height = " << m_height << endl;
         m_pixels.resize( m_width * m_height );
         for (int h = 0; h < m_height; h++)
         {
@@ -205,6 +196,6 @@ class CImageTGA : public CImage
     }
 };
 
-class CImageRAW : public CImage
-{
-};
+// class CImageRAW : public CImage
+// {
+// };

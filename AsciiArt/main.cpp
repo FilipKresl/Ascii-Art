@@ -3,9 +3,9 @@
  * @brief Main entry point. 
  */
 
-// clear; g++ -Wall -pedantic main.cpp && ./a.out
-// clear; g++ -Wall -pedantic main.cpp -lncurses && ./a.out johnny.bmp
-// clear; g++ -Wall -pedantic main.cpp -lncurses && ./a.out img0.bmp img1.bmp img2.bmp img3.bmp img4.bmp img5.bmp img6.bmp img7.bmp
+/*
+clear; g++ -Wall -pedantic main.cpp -lncurses
+*/
 
 #include <iostream>
 #include <string>
@@ -28,21 +28,30 @@
 
 using namespace std;
 
-void printHelp()
+void ncursInit()
 {
     initscr();
     cbreak();
     noecho();
+}
+void printHelp()
+{
+    ncursInit();
     printw ( "--HELP-- \n" );
     printw ( "commands: \n" );
     printw ( "  -h for help \n" );
     printw ( "  -p for play \n" );
-    printw ( "  -r for output in round Ascii (e.g. o80@) \n" );
-    printw ( "  -s for output in sharp Ascii (e.g. -/I#) \n" );
-    printw ( "  -c for output in color \n\n" );
+    printw ( "  -l for inserting own pallete in a file (write the name of the file before the images) \n" );
+    printw ( "  -n for natural look - initial stretching disabled \n" );
+    printw ( "  -r for output in round Ascii (e.g. o80@) (default) \n" );
+    printw ( "  -s for output in sharp Ascii (e.g. -/I#) \n\n" );
+    // printw ( "  -c for output in color \n" );
     printw ( "examples: \n" );
-    printw ( "  ./main -s img/johnny.bmp \n" );
-    printw ( "  ./main -r -p img/img*.bmp \n\n" );
+    printw ( "  ./a.out img/johnny.bmp \n" );
+    printw ( "  ./a.out img/albert.tga \n" );
+    printw ( "  ./a.out -l palleteNumbers.txt img/cat2.bmp img/cat.bmp \n" );
+    printw ( "  ./a.out -l palletePerfect.txt img/cat2.bmp img/cat.bmp \n" );
+    printw ( "  ./a.out -s -p img/img*.bmp \n\n" );
     printw ( "editing: \n" );
     printw ( "  Z,X,C,V for different types of RESIZING \n" );
     printw ( "  N,M     for SWITCHING between images \n" );
@@ -58,6 +67,15 @@ void printHelp()
     
     refresh();
 }
+void printError()
+{        
+    ncursInit();
+    printw( "--WRONG INPUT--\n" );
+    printw( "type:\n" );
+    printw( "   ./a.out -h\n" );
+    printw( "for help\n" );
+    refresh();
+}
 bool processCommands (  vector<char> & commands, bool & rbPlaying, 
                         int & routIndex, bool & rloadPallete, bool & rbdoStretch)
 {
@@ -67,7 +85,6 @@ bool processCommands (  vector<char> & commands, bool & rbPlaying,
         switch ( c )
         {
         case 'h':
-            printHelp();
             return false;
             break;
         case 'p':
@@ -84,9 +101,6 @@ bool processCommands (  vector<char> & commands, bool & rbPlaying,
             break;
         case 's':
             routIndex = 1;
-            break;
-        case 'c' :
-            routIndex = 2;
             break;
         default:
             break;
@@ -118,6 +132,7 @@ string loadPallete( vector<string> & rpaths )
     f.close();
     return pallete;
 }
+
 int main ( int argc, char** argv )
 {   
     CCommandLine cmd ( argc, argv );
@@ -129,26 +144,45 @@ int main ( int argc, char** argv )
     bool bPlaying   = false;
     bool bdoStretch = true;
     bool bPlayAllowed   = true;
-    bool bisNewPallete   = false;
+    bool bisNewPallete  = false;
     int  outIndex       = 0;
     string pallete      = "";
     
     if ( cmd.getError() == true )
+    {
+        printError();
         return 0;
+    }
     if ( processCommands( commands, bPlaying, outIndex, bisNewPallete, bdoStretch ) == false )
+    {
+        printHelp();
         return 0;
+    }
     if ( bisNewPallete == true )
     {
         pallete = loadPallete ( paths );
         if ( pallete == "" )
         {
-            printHelp();
+            printError();
             return 0;
         }
     }
-    CGallery gal ( paths, bdoStretch );
-    if ( gal.size() == 0 )
+    CGallery gal;
+    try
+    {
+        gal.init ( paths, bdoStretch );
+    }
+    catch ( ... )
+    {
+        printError();
         return 0;
+    }
+    
+    if ( gal.size() == 0 )
+    {
+        printError();
+        return 0;
+    }
     if ( gal.size() <= 1 )
     {
         bPlayAllowed = false;
@@ -158,7 +192,6 @@ int main ( int argc, char** argv )
     vector<COutput*> outVec;
     outVec.push_back ( new COutputRound );
     outVec.push_back ( new COutputSharp );
-    outVec.push_back ( new COutputColor );
     COutput * pOutput = outVec[outIndex];
     if ( bisNewPallete == false )
         pOutput->fillPallete();

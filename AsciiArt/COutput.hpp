@@ -26,15 +26,7 @@ public:
         m_resizeMode = 0;
     }
     virtual ~COutput () {}
-    virtual void fillPallete () 
-    {
-        m_palletes.clear();
-        m_palletes.push_back( " `" );
-        m_palletes.push_back( "` " );
-        // m_palletes.push_back( " .u0" );
-        // m_palletes.push_back( "0;. " );
-        m_pal = 0;
-    }
+    virtual void fillPallete () = 0;
     void invertPallete ()
     {
         if ( m_pal % 2 == 0 )
@@ -278,8 +270,7 @@ class COutputSharp : public COutput
     }
 };
 
-class COutputColor : public COutput
-{
-
-};
+// class COutputColor : public COutput
+// {
+// };
 

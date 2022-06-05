@@ -14,7 +14,14 @@ using namespace std;
 class CGallery
 {
 public:
-    CGallery( vector<string> & rpaths, bool bdoStretch) 
+    ~CGallery() 
+    {
+        for (int i = 0; i < m_gallery.size(); i++)
+        {
+            delete m_gallery[i];
+        }
+    }
+    void init ( vector<string> & rpaths, bool bdoStretch ) 
     {
         m_index = 0;
         for (int i = 0; i < rpaths.size(); i++)
@@ -31,22 +38,17 @@ public:
                 p = new CImageTGA ();
                 p->loadImg( rpaths[i], bdoStretch );
             }
-            else if ( fileExt == "raw" )
-            {
-            //  p = new CImageRAW ( rpaths[i] );
-            }
+            // else if ( fileExt == "raw" )
+            // {
+            //     p = new CImageRAW ();
+            //     p->loadImg( rpaths[i], bdoStretch );
+            // }
+            // // ...
             else 
             {
                 throw invalid_argument ( "unknown image extension in the command line" );
             }
             m_gallery.push_back( p );
-        }
-    }
-    ~CGallery() 
-    {
-        for (int i = 0; i < m_gallery.size(); i++)
-        {
-            delete m_gallery[i];
         }
     }
     CImage * getImage()
