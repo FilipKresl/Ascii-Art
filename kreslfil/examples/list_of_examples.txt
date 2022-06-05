@@ -1,0 +1,9 @@
+compiler:
+cd src; clear; g++ -Wall -pedantic main.cpp -lncurses
+
+interesting launches:
+./a.out ../assets/img/johnny.bmp
+./a.out ../assets/img/albert.tga
+./a.out -l palleteNumbers.txt ../assets/img/cat2.bmp img/cat.bmp
+./a.out -l palletePerfect.txt ../assets/img/cat2.bmp img/cat.bmp
+./a.out -s -p ../assets/img/img*.bmp
