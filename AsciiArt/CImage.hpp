@@ -7,6 +7,8 @@
 
 using namespace std;
 
+#define D if(0)
+
 struct rgba
 {
     uint8_t b, g, r, a;
@@ -15,34 +17,10 @@ struct rgba
 class CImage
 {
 public:
-    // virtual loadImg()
-    // {   
-    // }
-    void init ()
-    {
-        m_width  = m_buffer[18] + (m_buffer[19] << 8) + (m_buffer[20] << 16) + (m_buffer[21] << 24);
-        m_height = m_buffer[22] + (m_buffer[23] << 8) + (m_buffer[24] << 16) + (m_buffer[25] << 24);
-        m_paddingAmount = ((4 - (m_width*3) % 4 ) % 4 );
-    }
-    void fillPixels ()
-    {
-        m_pixels.resize( m_width * m_height );
-        for (int h = m_height - 1; h >= 0; h--)
-        {
-            for (int w = 0; w < m_width; w++)
-            {                
-                m_pixels[h * m_width + w].b = (float) m_buffer[m_index];
-                m_index++;
-                m_pixels[h * m_width + w].g = (float) m_buffer[m_index];
-                m_index++;
-                m_pixels[h * m_width + w].r = (float) m_buffer[m_index];
-                m_index++;
-                m_pixels[h * m_width + w].a = (float) m_buffer[m_index];
-                m_index++;
-            }
-        }
-        m_index += m_paddingAmount;
-    }
+    virtual ~CImage() {}
+    virtual void loadImg ( const string & filepath, bool bdoStretch ) = 0;
+    virtual void init ( bool bdoStretch ) = 0;
+    virtual void fillPixels () = 0;
     void convertGray ()
     {
         int len = m_pixels.size();
@@ -112,11 +90,11 @@ protected:
 class CImageBMP : public CImage
 {
 public:
-    CImageBMP ( const string & filepath )
+    virtual void loadImg( const string & filepath, bool bdoStretch )
     {
         fstream f ( filepath, ios::in | ios::binary );
         if ( !f.is_open () ) 
-            throw std::invalid_argument ( "Error: File Not Found." );
+            throw invalid_argument ( "Error: File Not Found." );
         
         int fileHeaderSize = 14;
         vector<uint8_t> fileHeader ( fileHeaderSize );
@@ -129,15 +107,102 @@ public:
         f.read ( reinterpret_cast<char*> ( m_buffer.data() ), m_fileSize);
         f.close();
 
-        init();
+        init( bdoStretch );
+        D dumpPixels();
+        D dumpGrayVec();
+    }
+    virtual void init ( bool bdoStretch )
+    {
+        m_width  = m_buffer[18] + (m_buffer[19] << 8) + (m_buffer[20] << 16) + (m_buffer[21] << 24);
+        m_height = m_buffer[22] + (m_buffer[23] << 8) + (m_buffer[24] << 16) + (m_buffer[25] << 24);
+        m_paddingAmount = ((4 - (m_width*3) % 4 ) % 4 );
         fillPixels();
         convertGray();
-        stretch();
+        if ( bdoStretch )
+            stretch();
+    }
+    virtual void fillPixels ()
+    {
+        m_pixels.resize( m_width * m_height );
+        for (int h = m_height - 1; h >= 0; h--)
+        {
+            for (int w = 0; w < m_width; w++)
+            {                
+                m_pixels[h * m_width + w].b = (float) m_buffer[m_index];
+                m_index++;
+                m_pixels[h * m_width + w].g = (float) m_buffer[m_index];
+                m_index++;
+                m_pixels[h * m_width + w].r = (float) m_buffer[m_index];
+                m_index++;
+                m_pixels[h * m_width + w].a = (float) m_buffer[m_index];
+                m_index++;
+            }
+        }
+        m_index += m_paddingAmount;
     }
 };
 
 class CImageTGA : public CImage
 {
+    virtual void loadImg( const string & filepath, bool bdoStretch )
+    {
+        fstream f ( filepath, ios::in | ios::binary );
+        if ( !f.is_open () ) 
+            throw invalid_argument ( "Error: File Not Found." );
+        
+        f.seekg ( 0, ios::beg );
+        streampos beg = f.tellg();
+        f.seekg ( 0, ios::end );
+        streampos end = f.tellg();
+        m_fileSize = end - beg;
+        f.seekg ( 0, ios::beg );
+        m_buffer.resize(m_fileSize);
+        f.read ( reinterpret_cast<char*> ( m_buffer.data() ), m_fileSize);
+        f.close();
+
+        // vector<uint8_t> fileHeader ( fileHeaderSize );
+        // f.read ( reinterpret_cast<char*> ( fileHeader.data() ), fileHeaderSize);
+        m_width    = m_buffer[12] + ( m_buffer[13] << 8 );
+        m_height   = m_buffer[14] + ( m_buffer[15] << 8 );
+        m_index    = 18;
+
+        // f.seekg ( 0, ios::beg );
+        // m_buffer.resize(m_fileSize);
+        // f.read ( reinterpret_cast<char*> ( m_buffer.data() ), m_fileSize);
+        // f.close();
+
+        init( bdoStretch );
+        D dumpPixels();
+        D dumpGrayVec();
+    }
+    virtual void init ( bool bdoStretch )
+    {
+        m_paddingAmount = 0;
+        fillPixels();
+        convertGray();
+        if ( bdoStretch )
+            stretch();
+    }
+    virtual void fillPixels ()
+    {
+        cout << "size = " << m_fileSize << endl;
+        cout << "m_width = " << m_width << " m_height = " << m_height << endl;
+        m_pixels.resize( m_width * m_height );
+        for (int h = 0; h < m_height; h++)
+        {
+            for (int w = 0; w < m_width; w++)
+            {                
+                m_pixels[h * m_width + w].b = (float) m_buffer[m_index];
+                m_index++;
+                m_pixels[h * m_width + w].g = (float) m_buffer[m_index];
+                m_index++;
+                m_pixels[h * m_width + w].r = (float) m_buffer[m_index];
+                m_index++;
+                m_pixels[h * m_width + w].a = 0;
+            }
+        }
+        m_index += m_paddingAmount;
+    }
 };
 
 class CImageRAW : public CImage

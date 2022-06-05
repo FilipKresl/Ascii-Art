@@ -17,7 +17,6 @@ public:
         parse();
         // dumpLine();
     }
-    ~CCommandLine () {}
     void parse ()
     {
         for (int i = 1; i < m_argc; i++)
@@ -37,8 +36,8 @@ public:
     void readCommand ( int i )
     {
         m_commands.push_back( m_argv[i][1] );
-        // if ( m_argv[i][1] == '\0' || m_argv[i][2] != '\0' )
-        //     m_error = true;
+        if ( m_argv[i][1] == '\0' || m_argv[i][2] != '\0' )
+            m_error = true;
     }
     vector<string> handoverImgs ()
     {

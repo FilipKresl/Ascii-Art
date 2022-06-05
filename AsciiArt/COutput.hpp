@@ -10,8 +10,6 @@
 
 #pragma once
 
-#define D if(0)
-
 using namespace std;
 
 class COutput
@@ -23,20 +21,18 @@ public:
         cbreak();
         noecho();
         clear();
-        fillPallete();
+        curs_set(0);
+        // fillPallete();
+        m_resizeMode = 0;
     }
-    ~COutput () {}
-    void fillPallete ()
+    virtual ~COutput () {}
+    virtual void fillPallete () 
     {
         m_palletes.clear();
-        m_palletes.push_back( " ." );
-        m_palletes.push_back( ". " );
-        m_palletes.push_back( " .u0" );
-        m_palletes.push_back( "0;. " );
-        m_palletes.push_back( "`-_/\\|I" );
-        m_palletes.push_back( "I|\\/_-`" );
-        m_palletes.push_back( " .;uoC0P@" );
-        m_palletes.push_back( "@P0Cou;. " );
+        m_palletes.push_back( " `" );
+        m_palletes.push_back( "` " );
+        // m_palletes.push_back( " .u0" );
+        // m_palletes.push_back( "0;. " );
         m_pal = 0;
     }
     void invertPallete ()
@@ -46,20 +42,21 @@ public:
         else
             m_pal --;
 
-        printArt();
+        // printArt();
     }
     void biggerPallete ()
     {
         if ( m_pal + 2 < m_palletes.size() ) 
             m_pal += 2;
-        printArt();
+
+        // printArt();
     }
     void smallerPallete ()
     {
         if ( m_pal - 2 >= 0 ) 
             m_pal -= 2;
 
-        printArt();
+        // printArt();
     }
     char convertAscii ( int index )
     {
@@ -77,10 +74,18 @@ public:
         m_xShift    = 0;
         m_yShift    = 0;
 
-        printArt();
+        // printArt();
     }
-    void printArt ()
+    virtual void printArt ()
     {
+        if      ( m_resizeMode == 1 )
+            fitByHeight();
+        else if ( m_resizeMode == 2 )
+            fitByWidth();
+        else if ( m_resizeMode == 3 )
+            fitPerfect();
+        else if ( m_resizeMode == 4 )
+            fitStretch();
         clear();
         int index = 0;
         for (int i = 0; i < m_height; i++)
@@ -151,7 +156,7 @@ public:
         m_height = newHeight;
         m_grays = newGrays;   
 
-        printArt();        
+        // printArt();        
     }
     void moveUp ()
     {
@@ -159,7 +164,7 @@ public:
             return;
 
         m_yShift ++;
-        printArt();
+        // printArt();
     }
     void moveDown ()
     {
@@ -167,25 +172,25 @@ public:
             return;
 
         m_yShift --;
-        printArt();
+        // printArt();
     }
     void moveRight ()
-    {
-        if ( m_xShift - 1 <= 0 )
-            return;
-
-        m_xShift --;
-        m_xShift --;
-        printArt();
-    }
-    void moveLeft ()
     {
         if ( m_xShift - 1 >= m_width - COLS )
             return;
 
         m_xShift ++;
         m_xShift ++;
-        printArt();
+        // printArt();  
+    }
+    void moveLeft ()
+    {
+        if ( m_xShift - 1 <= 0 )
+            return;
+
+        m_xShift --;
+        m_xShift --;
+        // printArt();
     }
     void checkShifts ()
     {
@@ -198,7 +203,7 @@ public:
         if ( m_xShift <= 0 )
              m_xShift =  0 ;
 
-        printArt();
+        // printArt();
     }
     void lightUp()
     {
@@ -209,7 +214,7 @@ public:
             if ( m_grays[i] < 15 ) 
                 m_grays[i] = 255;
         }
-        printArt();
+        // printArt();
     }
     void lightDown()
     {
@@ -220,7 +225,19 @@ public:
             if ( m_grays[i] > 255 - 15 ) 
                 m_grays[i] = 0;
         }
-        printArt();
+        // printArt();
+    }
+    void setResizeMod( int x )
+    {
+        if ( x >= 0 && x <= 4 )
+            m_resizeMode = x;
+    }
+    void setPallete( string palette )
+    {
+        m_palletes.clear();
+        m_palletes.push_back( palette );
+        m_palletes.push_back( palette );
+        m_pal = 0;
     }
 protected:
     vector<string>  m_palletes; // storing available char for output
@@ -230,24 +247,39 @@ protected:
     int             m_width;
     int             m_yShift;
     int             m_xShift;
+    int             m_resizeMode;
 };
 
-class CHexaOutput : public COutput
+class COutputRound : public COutput
+{
+    void fillPallete()
+    {
+        m_palletes.clear();
+        m_palletes.push_back( " o" );
+        m_palletes.push_back( "o " );
+        m_palletes.push_back( " .oO80" );
+        m_palletes.push_back( "08Oo. " );
+        m_pal = 0;
+    }
+};
+
+class COutputSharp : public COutput
+{
+    virtual void fillPallete ()
+    {
+        m_palletes.clear();
+        m_palletes.push_back( " -" );
+        m_palletes.push_back( "- " );
+        m_palletes.push_back( " ,-/" );
+        m_palletes.push_back( "/-, " );
+        m_palletes.push_back( "`-_/\\|I" );
+        m_palletes.push_back( "I|\\/_-`" );
+        m_pal = 0;
+    }
+};
+
+class COutputColor : public COutput
 {
 
 };
 
-class CColorOutput : public COutput
-{
-
-};
-
-class CFewAsciiOutput : public COutput
-{
-
-};
-
-class CManyAsciiOutput : public COutput
-{
-
-};

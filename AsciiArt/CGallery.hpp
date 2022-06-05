@@ -9,14 +9,12 @@
 
 #pragma once
 
-#define D if(0)
-
 using namespace std;
 
 class CGallery
 {
 public:
-    CGallery( vector<string> & rpaths) 
+    CGallery( vector<string> & rpaths, bool bdoStretch) 
     {
         m_index = 0;
         for (int i = 0; i < rpaths.size(); i++)
@@ -25,19 +23,21 @@ public:
             CImage * p = nullptr;
             if ( fileExt == "bmp" )
             {
-                p = new CImageBMP( rpaths[i] );
+                p = new CImageBMP ();
+                p->loadImg( rpaths[i], bdoStretch );
             }
             else if ( fileExt == "tga" )
             {
-                // p = new CImageTGA( rpaths[i] );
+                p = new CImageTGA ();
+                p->loadImg( rpaths[i], bdoStretch );
             }
             else if ( fileExt == "raw" )
             {
-                // p = new CImageRAW( rpaths[i] );
+            //  p = new CImageRAW ( rpaths[i] );
             }
             else 
             {
-                throw std::invalid_argument ( "unknown image extension in the command line" );
+                throw invalid_argument ( "unknown image extension in the command line" );
             }
             m_gallery.push_back( p );
         }
@@ -111,7 +111,10 @@ public:
             m_gallery[ m_index ] = m_gallery[ indexPrev ];
             m_gallery[ indexPrev ] = p;
         }
-
+    }
+    size_t size()
+    {
+        return m_gallery.size();
     }
 private:
     int             m_index;
