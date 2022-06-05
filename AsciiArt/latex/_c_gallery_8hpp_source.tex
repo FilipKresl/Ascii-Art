@@ -1,0 +1,132 @@
+\hypertarget{_c_gallery_8hpp_source}{}\doxysection{CGallery.\+hpp}
+\mbox{\hyperlink{_c_gallery_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <list>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <iomanip>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}CImage.hpp"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{21 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_gallery}{CGallery}}}
+\DoxyCodeLine{22 \{}
+\DoxyCodeLine{23 \textcolor{keyword}{public}:}
+\DoxyCodeLine{27     \mbox{\hyperlink{class_c_gallery_a8630755813d4f115a7b07c1f0ad55218}{\string~CGallery}}() }
+\DoxyCodeLine{28     \{}
+\DoxyCodeLine{29         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < m\_gallery.size(); i++)}
+\DoxyCodeLine{30         \{}
+\DoxyCodeLine{31             \textcolor{keyword}{delete} m\_gallery[i];}
+\DoxyCodeLine{32         \}}
+\DoxyCodeLine{33     \}}
+\DoxyCodeLine{40     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_gallery_a950d127eb2d4b93bb9298518b3ccb481}{init}} ( vector<string> \& rpaths, \textcolor{keywordtype}{bool} bdoStretch ) }
+\DoxyCodeLine{41     \{}
+\DoxyCodeLine{42         m\_index = 0;}
+\DoxyCodeLine{43         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < rpaths.size(); i++)}
+\DoxyCodeLine{44         \{}
+\DoxyCodeLine{45             \textcolor{keywordtype}{string} fileExt = getExt( rpaths[i] );}
+\DoxyCodeLine{46             \mbox{\hyperlink{class_c_image}{CImage}} * p = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{47             \textcolor{keywordflow}{if} ( fileExt == \textcolor{stringliteral}{"{}bmp"{}} )}
+\DoxyCodeLine{48             \{}
+\DoxyCodeLine{49                 p = \textcolor{keyword}{new} \mbox{\hyperlink{class_c_image_b_m_p}{CImageBMP}} ();}
+\DoxyCodeLine{50                 p-\/>loadImg( rpaths[i], bdoStretch );}
+\DoxyCodeLine{51             \}}
+\DoxyCodeLine{52             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( fileExt == \textcolor{stringliteral}{"{}tga"{}} )}
+\DoxyCodeLine{53             \{}
+\DoxyCodeLine{54                 p = \textcolor{keyword}{new} \mbox{\hyperlink{class_c_image_t_g_a}{CImageTGA}} ();}
+\DoxyCodeLine{55                 p-\/>loadImg( rpaths[i], bdoStretch );}
+\DoxyCodeLine{56             \}}
+\DoxyCodeLine{57             \textcolor{comment}{// else if ( fileExt == "{}raw"{} )}}
+\DoxyCodeLine{58             \textcolor{comment}{// \{}}
+\DoxyCodeLine{59             \textcolor{comment}{//     p = new CImageRAW ();}}
+\DoxyCodeLine{60             \textcolor{comment}{//     p-\/>loadImg( rpaths[i], bdoStretch );}}
+\DoxyCodeLine{61             \textcolor{comment}{// \}}}
+\DoxyCodeLine{62             \textcolor{comment}{// // ...}}
+\DoxyCodeLine{63             \textcolor{keywordflow}{else} }
+\DoxyCodeLine{64             \{}
+\DoxyCodeLine{65                 \textcolor{keywordflow}{throw} invalid\_argument ( \textcolor{stringliteral}{"{}unknown image extension in the command line"{}} );}
+\DoxyCodeLine{66             \}}
+\DoxyCodeLine{67             m\_gallery.push\_back( p );}
+\DoxyCodeLine{68         \}}
+\DoxyCodeLine{69     \}}
+\DoxyCodeLine{73     \mbox{\hyperlink{class_c_image}{CImage}} * \mbox{\hyperlink{class_c_gallery_a79e124513dcac7c3ba05dfb4b4fddae5}{getImage}}()}
+\DoxyCodeLine{74     \{}
+\DoxyCodeLine{75         \textcolor{keywordflow}{return} m\_gallery[m\_index];}
+\DoxyCodeLine{76     \}}
+\DoxyCodeLine{80     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_gallery_a1eb4a50dbf2d14721343f079b13e8c3f}{incIndex}}()}
+\DoxyCodeLine{81     \{}
+\DoxyCodeLine{82         m\_index ++;}
+\DoxyCodeLine{83         \textcolor{keywordflow}{if} ( m\_index >= m\_gallery.size() )}
+\DoxyCodeLine{84             m\_index = 0;}
+\DoxyCodeLine{85     \}}
+\DoxyCodeLine{89     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_gallery_a427a0b04e2b1bcc4d384aced7eb52e4f}{decIndex}}()}
+\DoxyCodeLine{90     \{}
+\DoxyCodeLine{91         m\_index -\/-\/;}
+\DoxyCodeLine{92         \textcolor{keywordflow}{if} ( m\_index < 0 )}
+\DoxyCodeLine{93             m\_index = m\_gallery.size() -\/ 1;}
+\DoxyCodeLine{94     \}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{99     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_gallery_ab41138182998668d94ececdb918e4770}{deleteImg}}()}
+\DoxyCodeLine{100     \{}
+\DoxyCodeLine{101         vector<CImage*>::iterator it;}
+\DoxyCodeLine{102         it = m\_gallery.begin();}
+\DoxyCodeLine{103         it += m\_index;}
+\DoxyCodeLine{104         \mbox{\hyperlink{class_c_image}{CImage}} * p = m\_gallery[m\_index];}
+\DoxyCodeLine{105         \textcolor{keywordflow}{if} ( m\_gallery.size() > 1 )}
+\DoxyCodeLine{106         \{}
+\DoxyCodeLine{107             m\_gallery.erase( it );}
+\DoxyCodeLine{108             \textcolor{keywordflow}{if} ( m\_index >= m\_gallery.size() )}
+\DoxyCodeLine{109                 m\_index = 0;}
+\DoxyCodeLine{110             \textcolor{keyword}{delete} p;}
+\DoxyCodeLine{111         \}}
+\DoxyCodeLine{112     \}}
+\DoxyCodeLine{116     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_gallery_a67e6821f1662da7e4de0c7f6240916d6}{moveImgForward}}()}
+\DoxyCodeLine{117     \{}
+\DoxyCodeLine{118         \textcolor{keywordflow}{if} ( m\_gallery.size() > 1 )}
+\DoxyCodeLine{119         \{}
+\DoxyCodeLine{120             \textcolor{keywordtype}{int} indexNext = m\_index + 1;}
+\DoxyCodeLine{121             \textcolor{keywordflow}{if} ( indexNext >= m\_gallery.size() )}
+\DoxyCodeLine{122                 indexNext = 0;}
+\DoxyCodeLine{123             \mbox{\hyperlink{class_c_image}{CImage}} * p = m\_gallery[ m\_index ];}
+\DoxyCodeLine{124             m\_gallery[ m\_index ] = m\_gallery[ indexNext ];}
+\DoxyCodeLine{125             m\_gallery[ indexNext ] = p;}
+\DoxyCodeLine{126         \}}
+\DoxyCodeLine{127     \}}
+\DoxyCodeLine{131     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_gallery_a0d0b4e19a3749d6c8e8bc9fcbe5cdff8}{moveImgBack}}()}
+\DoxyCodeLine{132     \{}
+\DoxyCodeLine{133         \textcolor{keywordflow}{if} ( m\_gallery.size() > 1 )}
+\DoxyCodeLine{134         \{}
+\DoxyCodeLine{135             \textcolor{keywordtype}{int} indexPrev = m\_index -\/ 1;}
+\DoxyCodeLine{136             \textcolor{keywordflow}{if} ( indexPrev < 0 )}
+\DoxyCodeLine{137                 indexPrev = m\_gallery.size() -\/ 1;}
+\DoxyCodeLine{138             \mbox{\hyperlink{class_c_image}{CImage}} * p = m\_gallery[ m\_index ];}
+\DoxyCodeLine{139             m\_gallery[ m\_index ] = m\_gallery[ indexPrev ];}
+\DoxyCodeLine{140             m\_gallery[ indexPrev ] = p;}
+\DoxyCodeLine{141         \}}
+\DoxyCodeLine{142     \}}
+\DoxyCodeLine{146     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_c_gallery_af7de53db9474e5975931a3de5eceb638}{size}}()}
+\DoxyCodeLine{147     \{}
+\DoxyCodeLine{148         \textcolor{keywordflow}{return} m\_gallery.size();}
+\DoxyCodeLine{149     \}}
+\DoxyCodeLine{150 \textcolor{keyword}{private}:}
+\DoxyCodeLine{157     \textcolor{keywordtype}{string} getExt( \textcolor{keywordtype}{string} path )}
+\DoxyCodeLine{158     \{}
+\DoxyCodeLine{159         \textcolor{keywordtype}{size\_t} i = path.rfind ( \textcolor{charliteral}{'.'}, path.size() );}
+\DoxyCodeLine{160         \textcolor{keywordflow}{if} ( i != string::npos ) }
+\DoxyCodeLine{161         \{}
+\DoxyCodeLine{162             \textcolor{keywordflow}{return} path.substr( i + 1, path.size() -\/ i );}
+\DoxyCodeLine{163         \}}
+\DoxyCodeLine{164         \textcolor{keywordflow}{return} string ( \textcolor{stringliteral}{"{}"{}} );}
+\DoxyCodeLine{165     \}}
+\DoxyCodeLine{166 \textcolor{keyword}{private}:}
+\DoxyCodeLine{167     \textcolor{keywordtype}{int}             m\_index;}
+\DoxyCodeLine{168     vector<CImage*> m\_gallery;}
+\DoxyCodeLine{169 \};}
+
+\end{DoxyCode}

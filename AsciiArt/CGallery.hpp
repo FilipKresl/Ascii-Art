@@ -1,3 +1,7 @@
+/**
+ * @file CGallery.hpp
+ * @brief CGallery
+ */
 #include <iostream>
 #include <string>
 #include <vector>
@@ -11,9 +15,15 @@
 
 using namespace std;
 
+/**
+ * @brief Class for storing and managing images
+ */
 class CGallery
 {
 public:
+    /**
+     * @brief destructor for allocated images 
+     */
     ~CGallery() 
     {
         for (int i = 0; i < m_gallery.size(); i++)
@@ -21,6 +31,12 @@ public:
             delete m_gallery[i];
         }
     }
+    /**
+     * @brief for each image decides by it's extension which COutput derived class should be made
+     * 
+     * @param rpaths vector containing paths of all images
+     * @param bdoStretch if images should be stretched or keep natural look
+     */
     void init ( vector<string> & rpaths, bool bdoStretch ) 
     {
         m_index = 0;
@@ -51,31 +67,35 @@ public:
             m_gallery.push_back( p );
         }
     }
+    /**
+     * @brief Getter for specifiic image by m_index
+     */
     CImage * getImage()
     {
         return m_gallery[m_index];
     }
+    /**
+     * @brief increases m_index -> move to next image
+     */
     void incIndex()
     {
         m_index ++;
         if ( m_index >= m_gallery.size() )
             m_index = 0;
     }
+    /**
+     * @brief decreases m_index -> move to previous image
+     */
     void decIndex()
     {
         m_index --;
         if ( m_index < 0 )
             m_index = m_gallery.size() - 1;
     }
-    string getExt( string path )
-    {
-        size_t i = path.rfind ( '.', path.size() );
-        if ( i != string::npos ) 
-        {
-            return path.substr( i + 1, path.size() - i );
-        }
-        return string ( "" );
-    }
+
+    /**
+     * @brief erase current image
+     */
     void deleteImg()
     {
         vector<CImage*>::iterator it;
@@ -90,6 +110,9 @@ public:
             delete p;
         }
     }
+    /**
+     * @brief swapps current images with the next one
+     */
     void moveImgForward()
     {
         if ( m_gallery.size() > 1 )
@@ -102,6 +125,9 @@ public:
             m_gallery[ indexNext ] = p;
         }
     }
+    /**
+     * @brief swapps current images with the previous one
+     */
     void moveImgBack()
     {
         if ( m_gallery.size() > 1 )
@@ -114,9 +140,28 @@ public:
             m_gallery[ indexPrev ] = p;
         }
     }
+    /**
+     * @brief getter for amount of images
+     */
     size_t size()
     {
         return m_gallery.size();
+    }
+private:
+    /**
+     * @brief reads the postfix (extension) of a image
+     * 
+     * @param path path to a image
+     * @return extension as a string 
+     */
+    string getExt( string path )
+    {
+        size_t i = path.rfind ( '.', path.size() );
+        if ( i != string::npos ) 
+        {
+            return path.substr( i + 1, path.size() - i );
+        }
+        return string ( "" );
     }
 private:
     int             m_index;

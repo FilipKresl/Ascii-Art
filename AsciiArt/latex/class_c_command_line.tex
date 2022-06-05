@@ -1,0 +1,119 @@
+\hypertarget{class_c_command_line}{}\doxysection{CCommand\+Line Class Reference}
+\label{class_c_command_line}\index{CCommandLine@{CCommandLine}}
+
+
+reads input from command line and processes commands  
+
+
+
+
+{\ttfamily \#include $<$CCommand\+Line.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_c_command_line_ad276be4575d243dab200eae61f2d9ed7}{CCommand\+Line}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_c_command_line}{CCommand\+Line}} object. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_c_command_line_aa847cf1839e954609c552b3903bf02e9}{process\+Commands}} (bool \&rb\+Playing, int \&rout\+Index, bool \&rload\+Pallete, bool \&rbdo\+Stretch)
+\begin{DoxyCompactList}\small\item\em reads all commands and decides which flag to set \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_c_command_line_aeef753a3f7959c9c997db7640eb465e8}{load\+Pallete}} (vector$<$ string $>$ \&rpaths)
+\begin{DoxyCompactList}\small\item\em loads user\textquotesingle{}s pallete from a file \end{DoxyCompactList}\item 
+vector$<$ string $>$ \mbox{\hyperlink{class_c_command_line_a2e96179da49bb66d5a8ebb91d25ad924}{handover\+Imgs}} ()
+\begin{DoxyCompactList}\small\item\em getter for a member vector containing all images \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_command_line_a20b468ce58ef9f5a1b9648ec28edd254}\label{class_c_command_line_a20b468ce58ef9f5a1b9648ec28edd254}} 
+void {\bfseries dump\+Line} ()
+\begin{DoxyCompactList}\small\item\em debug dump of all argumentes \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_command_line_a6793b91c9479fc8375fb9a1329587d58}\label{class_c_command_line_a6793b91c9479fc8375fb9a1329587d58}} 
+void {\bfseries dump\+IaC} ()
+\begin{DoxyCompactList}\small\item\em debug dump of all file names and commands \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_command_line_a6b8aa11d363dbc49428dde8901474278}\label{class_c_command_line_a6b8aa11d363dbc49428dde8901474278}} 
+bool {\bfseries get\+Error} ()
+\begin{DoxyCompactList}\small\item\em getter if a error has been detected \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+reads input from command line and processes commands 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_c_command_line_ad276be4575d243dab200eae61f2d9ed7}\label{class_c_command_line_ad276be4575d243dab200eae61f2d9ed7}} 
+\index{CCommandLine@{CCommandLine}!CCommandLine@{CCommandLine}}
+\index{CCommandLine@{CCommandLine}!CCommandLine@{CCommandLine}}
+\doxysubsubsection{\texorpdfstring{CCommandLine()}{CCommandLine()}}
+{\footnotesize\ttfamily CCommand\+Line\+::\+CCommand\+Line (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new \mbox{\hyperlink{class_c_command_line}{CCommand\+Line}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & counter of arguments \\
+\hline
+{\em argv} & pointer to separate arguments (e.\+g. commands, names of images, ...) \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_c_command_line_a2e96179da49bb66d5a8ebb91d25ad924}\label{class_c_command_line_a2e96179da49bb66d5a8ebb91d25ad924}} 
+\index{CCommandLine@{CCommandLine}!handoverImgs@{handoverImgs}}
+\index{handoverImgs@{handoverImgs}!CCommandLine@{CCommandLine}}
+\doxysubsubsection{\texorpdfstring{handoverImgs()}{handoverImgs()}}
+{\footnotesize\ttfamily vector$<$ string $>$ CCommand\+Line\+::handover\+Imgs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+getter for a member vector containing all images 
+
+\begin{DoxyReturn}{Returns}
+vector$<$string$>$ m\+\_\+imgs 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_command_line_aeef753a3f7959c9c997db7640eb465e8}\label{class_c_command_line_aeef753a3f7959c9c997db7640eb465e8}} 
+\index{CCommandLine@{CCommandLine}!loadPallete@{loadPallete}}
+\index{loadPallete@{loadPallete}!CCommandLine@{CCommandLine}}
+\doxysubsubsection{\texorpdfstring{loadPallete()}{loadPallete()}}
+{\footnotesize\ttfamily string CCommand\+Line\+::load\+Pallete (\begin{DoxyParamCaption}\item[{vector$<$ string $>$ \&}]{rpaths }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+loads user\textquotesingle{}s pallete from a file 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rpaths} & vector containing paths to each file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pallete as a string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_command_line_aa847cf1839e954609c552b3903bf02e9}\label{class_c_command_line_aa847cf1839e954609c552b3903bf02e9}} 
+\index{CCommandLine@{CCommandLine}!processCommands@{processCommands}}
+\index{processCommands@{processCommands}!CCommandLine@{CCommandLine}}
+\doxysubsubsection{\texorpdfstring{processCommands()}{processCommands()}}
+{\footnotesize\ttfamily bool CCommand\+Line\+::process\+Commands (\begin{DoxyParamCaption}\item[{bool \&}]{rb\+Playing,  }\item[{int \&}]{rout\+Index,  }\item[{bool \&}]{rload\+Pallete,  }\item[{bool \&}]{rbdo\+Stretch }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+reads all commands and decides which flag to set 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rb\+Playing} & if automatic play should be enabled right after launch \\
+\hline
+{\em rout\+Index} & reference output index -\/ which Output-\/\+Class should be selected \\
+\hline
+{\em rload\+Pallete} & if user\textquotesingle{}s pallete should be loaded \\
+\hline
+{\em rbdo\+Stretch} & if user wants to keep images unstreched \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if continue to process images 
+
+false if to print help and terminate 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_c_command_line_8hpp}{CCommand\+Line.\+hpp}}\end{DoxyCompactItemize}

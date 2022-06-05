@@ -1,9 +1,12 @@
 /**
  * @file main.cpp
- * @brief Main entry point. 
+ * @author Filip Kresl (kreslfil)
+ * @brief main entry point
+ * @version 1.0
+ * @date 2022-06-05
  */
 
-/*
+/* compiler
 clear; g++ -Wall -pedantic main.cpp -lncurses
 */
 
@@ -24,120 +27,12 @@ clear; g++ -Wall -pedantic main.cpp -lncurses
 #include "CGallery.hpp"
 #include "COutput.hpp"
 
-#define D if(0)
-
 using namespace std;
-
-void ncursInit()
-{
-    initscr();
-    cbreak();
-    noecho();
-}
-void printHelp()
-{
-    ncursInit();
-    printw ( "--HELP-- \n" );
-    printw ( "commands: \n" );
-    printw ( "  -h for help \n" );
-    printw ( "  -p for play \n" );
-    printw ( "  -l for inserting own pallete in a file (write the name of the file before the images) \n" );
-    printw ( "  -n for natural look - initial stretching disabled \n" );
-    printw ( "  -r for output in round Ascii (e.g. o80@) (default) \n" );
-    printw ( "  -s for output in sharp Ascii (e.g. -/I#) \n\n" );
-    // printw ( "  -c for output in color \n" );
-    printw ( "examples: \n" );
-    printw ( "  ./a.out img/johnny.bmp \n" );
-    printw ( "  ./a.out img/albert.tga \n" );
-    printw ( "  ./a.out -l palleteNumbers.txt img/cat2.bmp img/cat.bmp \n" );
-    printw ( "  ./a.out -l palletePerfect.txt img/cat2.bmp img/cat.bmp \n" );
-    printw ( "  ./a.out -s -p img/img*.bmp \n\n" );
-    printw ( "editing: \n" );
-    printw ( "  Z,X,C,V for different types of RESIZING \n" );
-    printw ( "  N,M     for SWITCHING between images \n" );
-    printw ( "  B       for RELOADING the image with initial setting \n" );
-    printw ( "  K,L     for increasing/decreasing LIGHT for the current image \n" );
-    printw ( "  W,A,S,D for MOVING the current image \n" );
-    printw ( "  F       for DELETING the image \n" );
-    printw ( "  G,H     for SWAPPING the image with previous/next one \n" );
-    printw ( "  I       for INVERTING the colors \n" );
-    printw ( "  O,P     for changing the PALLETE \n" );
-    printw ( "  U       for PLAY/STOP \n" );
-    printw ( "  Y       for changing the Direction of playing \n" );
-    
-    refresh();
-}
-void printError()
-{        
-    ncursInit();
-    printw( "--WRONG INPUT--\n" );
-    printw( "type:\n" );
-    printw( "   ./a.out -h\n" );
-    printw( "for help\n" );
-    refresh();
-}
-bool processCommands (  vector<char> & commands, bool & rbPlaying, 
-                        int & routIndex, bool & rloadPallete, bool & rbdoStretch)
-{
-    for (size_t i = 0; i < commands.size(); i++)
-    {
-        char c = commands[i];
-        switch ( c )
-        {
-        case 'h':
-            return false;
-            break;
-        case 'p':
-            rbPlaying = true;
-            break;
-        case 'l':
-            rloadPallete = true;
-            break;
-        case 'n':
-            rbdoStretch = false;
-            break;
-        case 'r':
-            routIndex = 0;
-            break;
-        case 's':
-            routIndex = 1;
-            break;
-        default:
-            break;
-        }
-    }
-
-    return true;
-}
-string getExt( string path )
-    {
-        size_t i = path.rfind ( '.', path.size() );
-        if ( i != string::npos ) 
-        {
-            return path.substr( i + 1, path.size() - i );
-        }
-        return string ( "" );
-    }
-string loadPallete( vector<string> & rpaths )
-{
-    if ( rpaths.size() == 0 || getExt( rpaths[0]) != "txt" )
-        return "";
-    string pathPallete = rpaths[0];
-    rpaths.erase( rpaths.begin() );
-    string pallete;
-    ifstream f ( pathPallete );
-    if ( !f.is_open () ) 
-        return "";
-    while ( getline ( f, pallete ) ) {}
-    f.close();
-    return pallete;
-}
 
 int main ( int argc, char** argv )
 {   
     CCommandLine cmd ( argc, argv );
     vector<string> paths  = cmd.handoverImgs();
-    vector<char> commands = cmd.handoverCmds();
 
     bool bContinue  = true;
     bool bDirection = true;
@@ -147,52 +42,61 @@ int main ( int argc, char** argv )
     bool bisNewPallete  = false;
     int  outIndex       = 0;
     string pallete      = "";
+    CMessages mes;
     
+    // if wrong format for a command
     if ( cmd.getError() == true )
     {
-        printError();
+        mes.printError();
         return 0;
     }
-    if ( processCommands( commands, bPlaying, outIndex, bisNewPallete, bdoStretch ) == false )
+    // sets flags from commands
+    // returns false if user asks for help manual
+    if ( cmd.processCommands( bPlaying, outIndex, bisNewPallete, bdoStretch ) == false )
     {
-        printHelp();
+        mes.printHelp();
         return 0;
     }
+    // if user wants to load his own Ascii-Pallete
     if ( bisNewPallete == true )
     {
-        pallete = loadPallete ( paths );
+        pallete = cmd.loadPallete ( paths );
+        // if Pallete not found or in wrong format
         if ( pallete == "" )
         {
-            printError();
+            mes.printError();
             return 0;
         }
     }
     CGallery gal;
     try
-    {
+    { 
+        // throws an exception if image name was not found
         gal.init ( paths, bdoStretch );
     }
     catch ( ... )
     {
-        printError();
+        mes.printError();
         return 0;
     }
-    
+    // if not valid image could have been loaded
     if ( gal.size() == 0 )
     {
-        printError();
+        mes.printError();
         return 0;
     }
+    // if only 1 image, don't allow automatic switching between images
     if ( gal.size() <= 1 )
     {
         bPlayAllowed = false;
         bPlaying     = false;
     }
-
+    // output vector - stores derivated output-classes via pointers, enables polymorphism
     vector<COutput*> outVec;
     outVec.push_back ( new COutputRound );
     outVec.push_back ( new COutputSharp );
     COutput * pOutput = outVec[outIndex];
+    // if default or users pallete should be used
     if ( bisNewPallete == false )
         pOutput->fillPallete();
     else
@@ -202,9 +106,11 @@ int main ( int argc, char** argv )
     pOutput->printArt();
     while ( bContinue )
     {
-        if ( bPlaying ) // play automatically
+        // repeatedly switches to next image, waits for 0.1 sec
+        if ( bPlaying )
         {
             nodelay(stdscr, TRUE);
+            // if next or previous image should be loaded
             if ( bDirection )
                 gal.incIndex();
             else 
@@ -214,13 +120,15 @@ int main ( int argc, char** argv )
             pOutput->printArt();
             this_thread::sleep_for(chrono::milliseconds(100));
         }
-        else            // stops playing
+        // stops playing
+        else 
             nodelay(stdscr, FALSE);
 
+        // main switch - reads a char if pressed and decides which edit function should be called
         char c = tolower ( getch() );
         switch ( c )
         {
-        // change the Ascii pallete
+        // change the Ascii-Pallete
         case 'i':
             pOutput->invertPallete();
             pOutput->printArt();
@@ -251,7 +159,7 @@ int main ( int argc, char** argv )
             pOutput->printArt();
             break;
         
-        // move the image
+        // move with the image
         case 'w':
             pOutput->moveUp();
             pOutput->printArt();
@@ -269,7 +177,7 @@ int main ( int argc, char** argv )
             pOutput->printArt();
             break;
             
-        // fit the image in the screen
+        // resize the image
         case 'z':
             pOutput->setResizeMod( 1 );
             pOutput->printArt();
@@ -297,7 +205,7 @@ int main ( int argc, char** argv )
             pOutput->printArt();
             break;
 
-        // order/delete the images
+        // change the order of images or delete one
         case 'f':
             gal.deleteImg();
             pOutput->readImg( gal.getImage() );
@@ -314,7 +222,7 @@ int main ( int argc, char** argv )
             pOutput->printArt();
             break;
 
-        // play / stop
+        // play & stop
         case 'u':
             if ( bPlayAllowed )
                 bPlaying = ! bPlaying;
@@ -337,6 +245,7 @@ int main ( int argc, char** argv )
 
     endwin();
 
+    // "destructor" for allocated Output-Classes
     for (size_t i = 0; i < outVec.size(); i++)
     {
         delete outVec[i];

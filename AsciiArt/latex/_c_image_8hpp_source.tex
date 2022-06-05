@@ -1,0 +1,206 @@
+\hypertarget{_c_image_8hpp_source}{}\doxysection{CImage.\+hpp}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <iomanip>}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define D if(0)}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{keyword}{struct }\mbox{\hyperlink{structrgba}{rgba}}}
+\DoxyCodeLine{13 \{}
+\DoxyCodeLine{14     uint8\_t b, g, r, a;}
+\DoxyCodeLine{15 \};}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_image}{CImage}}}
+\DoxyCodeLine{18 \{}
+\DoxyCodeLine{19 \textcolor{keyword}{public}:}
+\DoxyCodeLine{20     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_c_image}{\string~CImage}}() \{\}}
+\DoxyCodeLine{21     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} loadImg ( \textcolor{keyword}{const} \textcolor{keywordtype}{string} \& filepath, \textcolor{keywordtype}{bool} bdoStretch ) = 0;}
+\DoxyCodeLine{22     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} init ( \textcolor{keywordtype}{bool} bdoStretch ) = 0;}
+\DoxyCodeLine{23     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} fillPixels () = 0;}
+\DoxyCodeLine{24     \textcolor{keywordtype}{void} convertGray ()}
+\DoxyCodeLine{25     \{}
+\DoxyCodeLine{26         \textcolor{keywordtype}{int} len = m\_pixels.size();}
+\DoxyCodeLine{27         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < len; i++)}
+\DoxyCodeLine{28         \{}
+\DoxyCodeLine{29             \textcolor{keywordtype}{int} sum = (float) m\_pixels[i].b * 0.114  + (\textcolor{keywordtype}{float}) m\_pixels[i].g * 0.587+ (float) m\_pixels[i].r * 0.299 ;}
+\DoxyCodeLine{30             m\_grayVec.push\_back( sum );}
+\DoxyCodeLine{31         \} }
+\DoxyCodeLine{32     \}}
+\DoxyCodeLine{33     \textcolor{keywordtype}{void} stretch ()}
+\DoxyCodeLine{34     \{       }
+\DoxyCodeLine{35         vector<uint8\_t> tmp;}
+\DoxyCodeLine{36         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} h = 0; h < m\_height-\/1; h+=2)}
+\DoxyCodeLine{37         \{}
+\DoxyCodeLine{38             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} w = 0; w < m\_width; w++)}
+\DoxyCodeLine{39             \{}
+\DoxyCodeLine{40                 tmp.push\_back( (m\_grayVec[h*m\_width + w] + m\_grayVec[(h+1)*m\_width + w]) / 2 );}
+\DoxyCodeLine{41             \}}
+\DoxyCodeLine{42         \}}
+\DoxyCodeLine{43         }
+\DoxyCodeLine{44         m\_height /= 2;}
+\DoxyCodeLine{45         m\_grayVec = tmp;        }
+\DoxyCodeLine{46     \}}
+\DoxyCodeLine{47     \textcolor{keywordtype}{void} dumpPixels ()}
+\DoxyCodeLine{48     \{}
+\DoxyCodeLine{49         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < m\_pixels.size(); i++)}
+\DoxyCodeLine{50         \{}
+\DoxyCodeLine{51             cout << hex << setfill(\textcolor{charliteral}{'0'}) << setw(2) << (int) m\_pixels[i].b << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{52             cout << hex << setfill(\textcolor{charliteral}{'0'}) << setw(2) << (int) m\_pixels[i].g << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{53             cout << hex << setfill(\textcolor{charliteral}{'0'}) << setw(2) << (int) m\_pixels[i].r << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{54             cout << hex << setfill(\textcolor{charliteral}{'0'}) << setw(2) << (int) m\_pixels[i].a;}
+\DoxyCodeLine{55             cout << endl;}
+\DoxyCodeLine{56         \}}
+\DoxyCodeLine{57     \}}
+\DoxyCodeLine{58     \textcolor{keywordtype}{void} dumpGrayVec ()}
+\DoxyCodeLine{59     \{}
+\DoxyCodeLine{60         cout << \textcolor{stringliteral}{"{}grayVec:"{}} << endl;}
+\DoxyCodeLine{61         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < m\_grayVec.size(); i++)}
+\DoxyCodeLine{62         \{}
+\DoxyCodeLine{63             cout << hex << (int) m\_grayVec[i] << \textcolor{stringliteral}{"{} | "{}};}
+\DoxyCodeLine{64         \}}
+\DoxyCodeLine{65         cout << endl; }
+\DoxyCodeLine{66     \}}
+\DoxyCodeLine{67     \textcolor{keywordtype}{int} getHeight ()}
+\DoxyCodeLine{68     \{}
+\DoxyCodeLine{69         \textcolor{keywordflow}{return} m\_height;}
+\DoxyCodeLine{70     \}}
+\DoxyCodeLine{71     \textcolor{keywordtype}{int} getWidth ()}
+\DoxyCodeLine{72     \{}
+\DoxyCodeLine{73         \textcolor{keywordflow}{return} m\_width;}
+\DoxyCodeLine{74     \}}
+\DoxyCodeLine{75     vector<uint8\_t> getGrayVec ()}
+\DoxyCodeLine{76     \{}
+\DoxyCodeLine{77         \textcolor{keywordflow}{return} m\_grayVec;}
+\DoxyCodeLine{78     \}}
+\DoxyCodeLine{79 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{80     \textcolor{keywordtype}{int}             m\_fileSize;}
+\DoxyCodeLine{81     \textcolor{keywordtype}{int}             m\_width;}
+\DoxyCodeLine{82     \textcolor{keywordtype}{int}             m\_height;}
+\DoxyCodeLine{83     vector<uint8\_t> m\_buffer; \textcolor{comment}{// storing raw input}}
+\DoxyCodeLine{84     \textcolor{keywordtype}{int}             m\_index; \textcolor{comment}{// where to read from m\_buffer}}
+\DoxyCodeLine{85     vector<rgba>    m\_pixels; \textcolor{comment}{// storing rgba pixels}}
+\DoxyCodeLine{86     \textcolor{keywordtype}{int}             m\_paddingAmount;}
+\DoxyCodeLine{87     vector<uint8\_t> m\_grayVec; \textcolor{comment}{// storing 8bit average for each pixel}}
+\DoxyCodeLine{88 \};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_image_b_m_p}{CImageBMP}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_c_image}{CImage}}}
+\DoxyCodeLine{91 \{}
+\DoxyCodeLine{92 \textcolor{keyword}{public}:}
+\DoxyCodeLine{93     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} loadImg( \textcolor{keyword}{const} \textcolor{keywordtype}{string} \& filepath, \textcolor{keywordtype}{bool} bdoStretch )}
+\DoxyCodeLine{94     \{}
+\DoxyCodeLine{95         fstream f ( filepath, ios::in | ios::binary );}
+\DoxyCodeLine{96         \textcolor{keywordflow}{if} ( !f.is\_open () ) }
+\DoxyCodeLine{97             \textcolor{keywordflow}{throw} invalid\_argument ( \textcolor{stringliteral}{"{}File Not Found"{}} );}
+\DoxyCodeLine{98         }
+\DoxyCodeLine{99         \textcolor{keywordtype}{int} fileHeaderSize = 14;}
+\DoxyCodeLine{100         vector<uint8\_t> fileHeader ( fileHeaderSize );}
+\DoxyCodeLine{101         f.read ( \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>} ( fileHeader.data() ), fileHeaderSize);}
+\DoxyCodeLine{102         m\_fileSize = fileHeader[2] + (fileHeader[3] << 8) + (fileHeader[4]  << 16) + (fileHeader[5]  << 24);}
+\DoxyCodeLine{103         m\_index    = fileHeader[10] + (fileHeader[11] << 8) + (fileHeader[12]  << 16) + (fileHeader[13]  << 24);}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105         f.seekg ( 0, ios::beg );}
+\DoxyCodeLine{106         m\_buffer.resize(m\_fileSize);}
+\DoxyCodeLine{107         f.read ( \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>} ( m\_buffer.data() ), m\_fileSize);}
+\DoxyCodeLine{108         f.close();}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110         init( bdoStretch );}
+\DoxyCodeLine{111         D dumpPixels();}
+\DoxyCodeLine{112         D dumpGrayVec();}
+\DoxyCodeLine{113     \}}
+\DoxyCodeLine{114     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} init ( \textcolor{keywordtype}{bool} bdoStretch )}
+\DoxyCodeLine{115     \{}
+\DoxyCodeLine{116         m\_width  = m\_buffer[18] + (m\_buffer[19] << 8) + (m\_buffer[20] << 16) + (m\_buffer[21] << 24);}
+\DoxyCodeLine{117         m\_height = m\_buffer[22] + (m\_buffer[23] << 8) + (m\_buffer[24] << 16) + (m\_buffer[25] << 24);}
+\DoxyCodeLine{118         m\_paddingAmount = ((4 -\/ (m\_width*3) \% 4 ) \% 4 );}
+\DoxyCodeLine{119         fillPixels();}
+\DoxyCodeLine{120         convertGray();}
+\DoxyCodeLine{121         \textcolor{keywordflow}{if} ( bdoStretch )}
+\DoxyCodeLine{122             stretch();}
+\DoxyCodeLine{123     \}}
+\DoxyCodeLine{124     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} fillPixels ()}
+\DoxyCodeLine{125     \{}
+\DoxyCodeLine{126         m\_pixels.resize( m\_width * m\_height );}
+\DoxyCodeLine{127         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} h = m\_height -\/ 1; h >= 0; h-\/-\/)}
+\DoxyCodeLine{128         \{}
+\DoxyCodeLine{129             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} w = 0; w < m\_width; w++)}
+\DoxyCodeLine{130             \{                }
+\DoxyCodeLine{131                 m\_pixels[h * m\_width + w].b = (float) m\_buffer[m\_index];}
+\DoxyCodeLine{132                 m\_index++;}
+\DoxyCodeLine{133                 m\_pixels[h * m\_width + w].g = (float) m\_buffer[m\_index];}
+\DoxyCodeLine{134                 m\_index++;}
+\DoxyCodeLine{135                 m\_pixels[h * m\_width + w].r = (float) m\_buffer[m\_index];}
+\DoxyCodeLine{136                 m\_index++;}
+\DoxyCodeLine{137                 m\_pixels[h * m\_width + w].a = (float) m\_buffer[m\_index];}
+\DoxyCodeLine{138                 m\_index++;}
+\DoxyCodeLine{139             \}}
+\DoxyCodeLine{140         \}}
+\DoxyCodeLine{141         m\_index += m\_paddingAmount;}
+\DoxyCodeLine{142     \}}
+\DoxyCodeLine{143 \};}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_image_t_g_a}{CImageTGA}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_c_image}{CImage}}}
+\DoxyCodeLine{146 \{}
+\DoxyCodeLine{147     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} loadImg( \textcolor{keyword}{const} \textcolor{keywordtype}{string} \& filepath, \textcolor{keywordtype}{bool} bdoStretch )}
+\DoxyCodeLine{148     \{}
+\DoxyCodeLine{149         fstream f ( filepath, ios::in | ios::binary );}
+\DoxyCodeLine{150         \textcolor{keywordflow}{if} ( !f.is\_open () ) }
+\DoxyCodeLine{151             \textcolor{keywordflow}{throw} invalid\_argument ( \textcolor{stringliteral}{"{}File Not Found"{}} );}
+\DoxyCodeLine{152         }
+\DoxyCodeLine{153         f.seekg ( 0, ios::beg );}
+\DoxyCodeLine{154         streampos beg = f.tellg();}
+\DoxyCodeLine{155         f.seekg ( 0, ios::end );}
+\DoxyCodeLine{156         streampos end = f.tellg();}
+\DoxyCodeLine{157         m\_fileSize = end -\/ beg;}
+\DoxyCodeLine{158         f.seekg ( 0, ios::beg );}
+\DoxyCodeLine{159         m\_buffer.resize(m\_fileSize);}
+\DoxyCodeLine{160         f.read ( \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>} ( m\_buffer.data() ), m\_fileSize);}
+\DoxyCodeLine{161         f.close();}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163         m\_width    = m\_buffer[12] + ( m\_buffer[13] << 8 );}
+\DoxyCodeLine{164         m\_height   = m\_buffer[14] + ( m\_buffer[15] << 8 );}
+\DoxyCodeLine{165         m\_index    = 18;}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167         init( bdoStretch );}
+\DoxyCodeLine{168         D dumpPixels();}
+\DoxyCodeLine{169         D dumpGrayVec();}
+\DoxyCodeLine{170     \}}
+\DoxyCodeLine{171     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} init ( \textcolor{keywordtype}{bool} bdoStretch )}
+\DoxyCodeLine{172     \{}
+\DoxyCodeLine{173         m\_paddingAmount = 0;}
+\DoxyCodeLine{174         fillPixels();}
+\DoxyCodeLine{175         convertGray();}
+\DoxyCodeLine{176         \textcolor{keywordflow}{if} ( bdoStretch )}
+\DoxyCodeLine{177             stretch();}
+\DoxyCodeLine{178     \}}
+\DoxyCodeLine{179     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} fillPixels ()}
+\DoxyCodeLine{180     \{}
+\DoxyCodeLine{181         m\_pixels.resize( m\_width * m\_height );}
+\DoxyCodeLine{182         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} h = 0; h < m\_height; h++)}
+\DoxyCodeLine{183         \{}
+\DoxyCodeLine{184             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} w = 0; w < m\_width; w++)}
+\DoxyCodeLine{185             \{                }
+\DoxyCodeLine{186                 m\_pixels[h * m\_width + w].b = (float) m\_buffer[m\_index];}
+\DoxyCodeLine{187                 m\_index++;}
+\DoxyCodeLine{188                 m\_pixels[h * m\_width + w].g = (float) m\_buffer[m\_index];}
+\DoxyCodeLine{189                 m\_index++;}
+\DoxyCodeLine{190                 m\_pixels[h * m\_width + w].r = (float) m\_buffer[m\_index];}
+\DoxyCodeLine{191                 m\_index++;}
+\DoxyCodeLine{192                 m\_pixels[h * m\_width + w].a = 0;}
+\DoxyCodeLine{193             \}}
+\DoxyCodeLine{194         \}}
+\DoxyCodeLine{195         m\_index += m\_paddingAmount;}
+\DoxyCodeLine{196     \}}
+\DoxyCodeLine{197 \};}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199 \textcolor{comment}{// class CImageRAW : public CImage}}
+\DoxyCodeLine{200 \textcolor{comment}{// \{}}
+\DoxyCodeLine{201 \textcolor{comment}{// \};}}
+
+\end{DoxyCode}

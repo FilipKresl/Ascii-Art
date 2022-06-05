@@ -1,3 +1,7 @@
+/**
+ * @file CImage.hpp
+ * @brief (base) CImage, (derived) CImageBMP, (derived) CImageTGA
+ */
 #include <iostream>
 #include <string>
 #include <vector>
@@ -7,29 +11,106 @@
 
 using namespace std;
 
-#define D if(0)
-
+/**
+ * @brief struct for stoirng info about one pixel: Blue, Green, Red, Alpha
+ */
 struct rgba
 {
     uint8_t b, g, r, a;
 };
 
+/**
+ * @brief base Class for initializing the image and enabling basic editing
+ */
 class CImage
 {
 public:
     virtual ~CImage() {}
+    /**
+     * @brief pure virtual method for loading the image
+     * 
+     * @param filepath to the image
+     * @param bdoStretch if should be stretched
+     */
     virtual void loadImg ( const string & filepath, bool bdoStretch ) = 0;
+    /**
+     * @brief pure virtual method for initializing th eimage
+     * @param bdoStretch if should be stretched
+     */
+    void dumpPixels ()
+    {
+        for (int i = 0; i < m_pixels.size(); i++)
+        {
+            cout << hex << setfill('0') << setw(2) << (int) m_pixels[i].b << " ";
+            cout << hex << setfill('0') << setw(2) << (int) m_pixels[i].g << " ";
+            cout << hex << setfill('0') << setw(2) << (int) m_pixels[i].r << " ";
+            cout << hex << setfill('0') << setw(2) << (int) m_pixels[i].a;
+            cout << endl;
+        }
+    }
+    /**
+     * @brief debug method for printing vector containing pixels converted to grayscale 8-bit number
+     */
+    void dumpGrayVec ()
+    {
+        cout << "grayVec:" << endl;
+        for (int i = 0; i < m_grayVec.size(); i++)
+        {
+            cout << hex << (int) m_grayVec[i] << " | ";
+        }
+        cout << endl; 
+    }
+    /**
+     * @brief getter for the height of an image
+     * @return the height of an image 
+     */
+    int getHeight ()
+    {
+        return m_height;
+    }
+    /**
+     * @brief getter for the width of an image
+     * @return the width of an image 
+     */
+    int getWidth ()
+    {
+        return m_width;
+    }
+    /**
+     * @brief getter for vector containing pixels converted to grayscale 8-bit number
+     * @return the vector 
+     */
+    vector<uint8_t> getGrayVec ()
+    {
+        return m_grayVec;
+    }
+protected:
     virtual void init ( bool bdoStretch ) = 0;
+    /**
+     * @brief pure virtual method for reading the image and storing pixels as rgba to a member vector
+     */
     virtual void fillPixels () = 0;
+    /**
+     * @brief debug method for printing each pixel as rgba
+     */
+    /**
+     * @brief method for converting rgba to grayscale
+     */
     void convertGray ()
     {
         int len = m_pixels.size();
         for (int i = 0; i < len; i++)
         {
-            int sum = (float) m_pixels[i].b * 0.114  + (float) m_pixels[i].g * 0.587+ (float) m_pixels[i].r * 0.299 ;
+            int sum = (float) m_pixels[i].b * 0.114 + (float) m_pixels[i].g * 0.587+ (float) m_pixels[i].r * 0.299 ;
             m_grayVec.push_back( sum );
         } 
     }
+    /**
+     * @brief optically helps the image by letting each other row out
+     * because of disproportion of an Ascii char space 
+     * (height of an Ascii char space is almost twice as long as width)
+     * the image would be "too narrow" and look unnatural
+     */
     void stretch ()
     {       
         vector<uint8_t> tmp;
@@ -44,38 +125,6 @@ public:
         m_height /= 2;
         m_grayVec = tmp;        
     }
-    void dumpPixels ()
-    {
-        for (int i = 0; i < m_pixels.size(); i++)
-        {
-            cout << hex << setfill('0') << setw(2) << (int) m_pixels[i].b << " ";
-            cout << hex << setfill('0') << setw(2) << (int) m_pixels[i].g << " ";
-            cout << hex << setfill('0') << setw(2) << (int) m_pixels[i].r << " ";
-            cout << hex << setfill('0') << setw(2) << (int) m_pixels[i].a;
-            cout << endl;
-        }
-    }
-    void dumpGrayVec ()
-    {
-        cout << "grayVec:" << endl;
-        for (int i = 0; i < m_grayVec.size(); i++)
-        {
-            cout << hex << (int) m_grayVec[i] << " | ";
-        }
-        cout << endl; 
-    }
-    int getHeight ()
-    {
-        return m_height;
-    }
-    int getWidth ()
-    {
-        return m_width;
-    }
-    vector<uint8_t> getGrayVec ()
-    {
-        return m_grayVec;
-    }
 protected:
     int             m_fileSize;
     int             m_width;
@@ -86,10 +135,18 @@ protected:
     int             m_paddingAmount;
     vector<uint8_t> m_grayVec; // storing 8bit average for each pixel
 };
-
+/**
+ * @brief derived class specifically made for processing BMP image
+ */
 class CImageBMP : public CImage
 {
 public:
+    /**
+     * @brief loads the BMP image
+     * 
+     * @param filepath to the image
+     * @param bdoStretch if should be stretched
+     */
     virtual void loadImg( const string & filepath, bool bdoStretch )
     {
         fstream f ( filepath, ios::in | ios::binary );
@@ -108,9 +165,12 @@ public:
         f.close();
 
         init( bdoStretch );
-        D dumpPixels();
-        D dumpGrayVec();
     }
+    /**
+     * @brief initializes the BMP image
+     * 
+     * @param bdoStretch if should be stretched
+     */
     virtual void init ( bool bdoStretch )
     {
         m_width  = m_buffer[18] + (m_buffer[19] << 8) + (m_buffer[20] << 16) + (m_buffer[21] << 24);
@@ -121,6 +181,9 @@ public:
         if ( bdoStretch )
             stretch();
     }
+    /**
+     * @brief stores pixels as rgba to a member vector
+     */
     virtual void fillPixels ()
     {
         m_pixels.resize( m_width * m_height );
@@ -141,9 +204,17 @@ public:
         m_index += m_paddingAmount;
     }
 };
-
+/**
+ * @brief derived class specifically made for processing TGA image
+ */
 class CImageTGA : public CImage
 {
+    /**
+     * @brief loads the TGA image
+     * 
+     * @param filepath to the image
+     * @param bdoStretch if should be stretched
+     */
     virtual void loadImg( const string & filepath, bool bdoStretch )
     {
         fstream f ( filepath, ios::in | ios::binary );
@@ -165,9 +236,12 @@ class CImageTGA : public CImage
         m_index    = 18;
 
         init( bdoStretch );
-        D dumpPixels();
-        D dumpGrayVec();
     }
+    /**
+     * @brief initializes the TGA image
+     * 
+     * @param bdoStretch if should be stretched
+     */
     virtual void init ( bool bdoStretch )
     {
         m_paddingAmount = 0;
@@ -176,6 +250,9 @@ class CImageTGA : public CImage
         if ( bdoStretch )
             stretch();
     }
+    /**
+     * @brief stores pixels as rgba to a member vector
+     */
     virtual void fillPixels ()
     {
         m_pixels.resize( m_width * m_height );
@@ -199,3 +276,5 @@ class CImageTGA : public CImage
 // class CImageRAW : public CImage
 // {
 // };
+
+// other derived classes ...

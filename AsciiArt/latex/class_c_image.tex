@@ -1,0 +1,73 @@
+\hypertarget{class_c_image}{}\doxysection{CImage Class Reference}
+\label{class_c_image}\index{CImage@{CImage}}
+Inheritance diagram for CImage\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_c_image}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_c_image_aa425d3e0ff9769e123228221c1443f01}\label{class_c_image_aa425d3e0ff9769e123228221c1443f01}} 
+virtual void {\bfseries load\+Img} (const string \&filepath, bool bdo\+Stretch)=0
+\item 
+\mbox{\Hypertarget{class_c_image_a159d8b4e370cbb01b9e37b4c214e8c9f}\label{class_c_image_a159d8b4e370cbb01b9e37b4c214e8c9f}} 
+virtual void {\bfseries init} (bool bdo\+Stretch)=0
+\item 
+\mbox{\Hypertarget{class_c_image_a981fa3a6c94c7b558ccff057d50e6cb2}\label{class_c_image_a981fa3a6c94c7b558ccff057d50e6cb2}} 
+virtual void {\bfseries fill\+Pixels} ()=0
+\item 
+\mbox{\Hypertarget{class_c_image_a1fe0be0368bc9edc7c565590a21e5be3}\label{class_c_image_a1fe0be0368bc9edc7c565590a21e5be3}} 
+void {\bfseries convert\+Gray} ()
+\item 
+\mbox{\Hypertarget{class_c_image_aa3a5006f64c146084d94d8aad6f4b2d3}\label{class_c_image_aa3a5006f64c146084d94d8aad6f4b2d3}} 
+void {\bfseries stretch} ()
+\item 
+\mbox{\Hypertarget{class_c_image_a8c9df5166f9b0277df248c7798f5bbf2}\label{class_c_image_a8c9df5166f9b0277df248c7798f5bbf2}} 
+void {\bfseries dump\+Pixels} ()
+\item 
+\mbox{\Hypertarget{class_c_image_ae875f40cf9f1b26c0eb3a5bf65127993}\label{class_c_image_ae875f40cf9f1b26c0eb3a5bf65127993}} 
+void {\bfseries dump\+Gray\+Vec} ()
+\item 
+\mbox{\Hypertarget{class_c_image_ab21791912938e10577eefa4a7957a7bb}\label{class_c_image_ab21791912938e10577eefa4a7957a7bb}} 
+int {\bfseries get\+Height} ()
+\item 
+\mbox{\Hypertarget{class_c_image_ae96e074c50b0ca39cf5398fb9e16cf33}\label{class_c_image_ae96e074c50b0ca39cf5398fb9e16cf33}} 
+int {\bfseries get\+Width} ()
+\item 
+\mbox{\Hypertarget{class_c_image_a32f0b7c6b38bc80c7265aa9c855aa6cb}\label{class_c_image_a32f0b7c6b38bc80c7265aa9c855aa6cb}} 
+vector$<$ uint8\+\_\+t $>$ {\bfseries get\+Gray\+Vec} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_c_image_a3cb59eb2e2c2dc3fa2bb60465e50a011}\label{class_c_image_a3cb59eb2e2c2dc3fa2bb60465e50a011}} 
+int {\bfseries m\+\_\+file\+Size}
+\item 
+\mbox{\Hypertarget{class_c_image_a85c13157393a278a995970109f8e7841}\label{class_c_image_a85c13157393a278a995970109f8e7841}} 
+int {\bfseries m\+\_\+width}
+\item 
+\mbox{\Hypertarget{class_c_image_a5f146460517fd4ae7969c7694ddccae1}\label{class_c_image_a5f146460517fd4ae7969c7694ddccae1}} 
+int {\bfseries m\+\_\+height}
+\item 
+\mbox{\Hypertarget{class_c_image_afe9d5f3885e4ff5584979ab901073c0b}\label{class_c_image_afe9d5f3885e4ff5584979ab901073c0b}} 
+vector$<$ uint8\+\_\+t $>$ {\bfseries m\+\_\+buffer}
+\item 
+\mbox{\Hypertarget{class_c_image_ad5c097cd66a0b5439ffb08209fdfbecb}\label{class_c_image_ad5c097cd66a0b5439ffb08209fdfbecb}} 
+int {\bfseries m\+\_\+index}
+\item 
+\mbox{\Hypertarget{class_c_image_a38abc59fcb5af39912ea7db2f04b93c0}\label{class_c_image_a38abc59fcb5af39912ea7db2f04b93c0}} 
+vector$<$ \mbox{\hyperlink{structrgba}{rgba}} $>$ {\bfseries m\+\_\+pixels}
+\item 
+\mbox{\Hypertarget{class_c_image_a3101752958dbb907712a188f59ee945e}\label{class_c_image_a3101752958dbb907712a188f59ee945e}} 
+int {\bfseries m\+\_\+padding\+Amount}
+\item 
+\mbox{\Hypertarget{class_c_image_a958e59dbc4f7c247e4b2287112ccde3a}\label{class_c_image_a958e59dbc4f7c247e4b2287112ccde3a}} 
+vector$<$ uint8\+\_\+t $>$ {\bfseries m\+\_\+gray\+Vec}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+CImage.\+hpp\end{DoxyCompactItemize}

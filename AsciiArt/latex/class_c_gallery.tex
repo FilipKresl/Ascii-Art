@@ -1,0 +1,68 @@
+\hypertarget{class_c_gallery}{}\doxysection{CGallery Class Reference}
+\label{class_c_gallery}\index{CGallery@{CGallery}}
+
+
+Class for storing and managing images.  
+
+
+
+
+{\ttfamily \#include $<$CGallery.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_c_gallery_a8630755813d4f115a7b07c1f0ad55218}\label{class_c_gallery_a8630755813d4f115a7b07c1f0ad55218}} 
+{\bfseries $\sim$\+CGallery} ()
+\begin{DoxyCompactList}\small\item\em destructor for allocated images \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_c_gallery_a950d127eb2d4b93bb9298518b3ccb481}{init}} (vector$<$ string $>$ \&rpaths, bool bdo\+Stretch)
+\begin{DoxyCompactList}\small\item\em for each image decides by it\textquotesingle{}s extension which \mbox{\hyperlink{class_c_output}{COutput}} derived class should be made \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_gallery_a79e124513dcac7c3ba05dfb4b4fddae5}\label{class_c_gallery_a79e124513dcac7c3ba05dfb4b4fddae5}} 
+\mbox{\hyperlink{class_c_image}{CImage}} $\ast$ {\bfseries get\+Image} ()
+\begin{DoxyCompactList}\small\item\em Getter for specifiic image by m\+\_\+index. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_gallery_a1eb4a50dbf2d14721343f079b13e8c3f}\label{class_c_gallery_a1eb4a50dbf2d14721343f079b13e8c3f}} 
+void {\bfseries inc\+Index} ()
+\begin{DoxyCompactList}\small\item\em increases m\+\_\+index -\/\texorpdfstring{$>$}{>} move to next image \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_gallery_a427a0b04e2b1bcc4d384aced7eb52e4f}\label{class_c_gallery_a427a0b04e2b1bcc4d384aced7eb52e4f}} 
+void {\bfseries dec\+Index} ()
+\begin{DoxyCompactList}\small\item\em decreases m\+\_\+index -\/\texorpdfstring{$>$}{>} move to previous image \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_gallery_ab41138182998668d94ececdb918e4770}\label{class_c_gallery_ab41138182998668d94ececdb918e4770}} 
+void {\bfseries delete\+Img} ()
+\begin{DoxyCompactList}\small\item\em erase current image \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_gallery_a67e6821f1662da7e4de0c7f6240916d6}\label{class_c_gallery_a67e6821f1662da7e4de0c7f6240916d6}} 
+void {\bfseries move\+Img\+Forward} ()
+\begin{DoxyCompactList}\small\item\em swapps current images with the next one \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_gallery_a0d0b4e19a3749d6c8e8bc9fcbe5cdff8}\label{class_c_gallery_a0d0b4e19a3749d6c8e8bc9fcbe5cdff8}} 
+void {\bfseries move\+Img\+Back} ()
+\begin{DoxyCompactList}\small\item\em swapps current images with the previous one \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_gallery_af7de53db9474e5975931a3de5eceb638}\label{class_c_gallery_af7de53db9474e5975931a3de5eceb638}} 
+size\+\_\+t {\bfseries size} ()
+\begin{DoxyCompactList}\small\item\em getter for amount of images \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for storing and managing images. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_c_gallery_a950d127eb2d4b93bb9298518b3ccb481}\label{class_c_gallery_a950d127eb2d4b93bb9298518b3ccb481}} 
+\index{CGallery@{CGallery}!init@{init}}
+\index{init@{init}!CGallery@{CGallery}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void CGallery\+::init (\begin{DoxyParamCaption}\item[{vector$<$ string $>$ \&}]{rpaths,  }\item[{bool}]{bdo\+Stretch }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+for each image decides by it\textquotesingle{}s extension which \mbox{\hyperlink{class_c_output}{COutput}} derived class should be made 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rpaths} & vector containing paths of all images \\
+\hline
+{\em bdo\+Stretch} & if images should be stretched or keep natural look \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_c_gallery_8hpp}{CGallery.\+hpp}}\end{DoxyCompactItemize}
