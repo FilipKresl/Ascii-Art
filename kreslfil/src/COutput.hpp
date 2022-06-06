@@ -407,6 +407,7 @@ public:
         printw ( "  Y       for changing the Direction of playing \n" );
         
         refresh();
+        endwin();
     }
     /**
      * @brief prints the error message if incorrect input detected 
@@ -419,6 +420,7 @@ public:
     printw( "   ./a.out -h\n" );
     printw( "for help\n" );
     refresh();
+    endwin();
 }
 };
 

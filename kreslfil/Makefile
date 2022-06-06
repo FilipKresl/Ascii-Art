@@ -2,7 +2,7 @@ CXX=g++
 LD=g++
 CXXFLAGS=-Wall -pedantic
 
-all: main.o CCommandLine.o CGallery.o CImage.o COutput.o
+all: main.o
 
 compile: kreslfil
 
@@ -32,6 +32,7 @@ main.o: src/main.cpp src/CCommandLine.hpp src/CGallery.hpp src/COutput.hpp
 
 clean:
 	rm -f *.o kreslfil Makefile.d
+	rm -rf doc
 
 deps:
 	$(CXX) -MM *cpp > Makefile.d
@@ -43,6 +44,8 @@ runJohnny: kreslfil
 	./kreslfil assets/img/johnny.bmp
 
 doc: 
-	cd .
+	doxygen
+	mv doc/html/* doc/
+	rmdir doc/html
 
 -include Makefile.d

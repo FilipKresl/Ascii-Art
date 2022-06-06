@@ -25,18 +25,17 @@ Moje plánovaná implementace
 
 ASCII-art
 
-Výsledný program umožní načítání různých typů grafických souborů, konkrétně BMP, TGA a RAW, 
-následně jednotlivé pixely pomocí konverzního algoritmu převede na ascii znaky a ty za pomoci ncurses 
+Výsledný program umožní načítání různých typů grafických souborů, konkrétně BMP, TGA a bude pripraven 
+na vytvareni dalsich odvozenych trid za ucelem rozsireni palety povolenych formatu.
+Následně jednotlivé pixely pomocí konverzního algoritmu převede na Ascii znaky a ty za pomoci ncurses 
 vytiskne do terminálu.
 
 Program bude nabízet několik podob výsledného outputu. 
 Např.:
-    černé ascii znaky na bílé ploše za pomoci větší a nebo menší defaultní sady znaků,
-    zobrazení pouze jedné barevné složky obrázku,
-    vertikální nebo horizontální převrácení,
-    barevná inverze, zjasnění nebo ztmavení obrázku a další barevné operace,
+    barevná inverze, zjasnění nebo ztmavení obrázku,
+    rozsireni ci naopak zmenseni outputove Ascii palety,
+    posouvani obrazku ci nekolik moznych zmen jejich velikosti,
     vkládání obrázků do galerie, následné přehrávání sekvence a její editace:
-        nastavování rychlosti, 
         invertování směru přehrávání, 
         pauzování, 
         měnění pořadí obrázků, ...
@@ -45,13 +44,19 @@ Např.:
     např:
         vytištění helpu,
         zadání souboru se sérií znaků, pomocí kterých se má daný ascii art vygenerovat
-        a nebo zobrazení obrázku v různých textových podobách (hexa, ascii art, ...).
+        a nebo zvoleni konkretni preddefinovane odvozene vystupni tridy (napr. zvoleni Asci znaku 
+        s ruznymi vizualnimi rysy).
     
 Polymorfismus bude v programu využit na několika místech, 
 např.:
-    při načítání různých grafických souborů implementovaných třídami odvozenými z CImage,
-    různé grafické výstupy do textového terminálu implementované v třídách inheritovaných z třídy COutput.
+    Při načítání různých grafických souborů implementovaných třídami odvozenými z CImage,
+        zde napr. trida CImageBMP zpracuje nacitani obrazku jinak nez trida CImageTGA, 
+        ale konverzni metody budou totozne. Program je modularni, je mozne jej jednoduse editovat 
+        a pripravit i dalsi odvozene tridy pro nacitani vice formatu.
+    Pro různé grafické výstupy do textového terminálu implementované v třídách inheritovaných z třídy 
+        COutput. Odvozena trida COutputRound zkonvertuje zadany obrazek do Ascii znaku s kulatymi rysy, 
+        naopak COutputSharp do Ascii znaku s ostrymi rysy. Program je opet pripraven na jednduche 
+        rozsireni dalsich vystupnich typu.
 
-Program je částečně rozpracovaný, nejdůležitější třídy jsou přiložené.
 
-Dokumentace je k dispozici v ./doc/html/index.html
+Dokumentace vcente grafickeho znazorneni je k dispozici v ./doc/index.html.

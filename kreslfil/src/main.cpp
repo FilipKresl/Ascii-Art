@@ -5,6 +5,30 @@
  * @version 1.0
  * @date 2022-06-05
  */
+/*! @mainpage Ascii Art
+ *
+ * @section Introduction
+ *
+ * This c++ program enables to load images from a file and convert them into Ascii chars. User is then allowed to modify the images while program is running
+ *
+ * @section Unpopular_opinion
+ * 
+ * Although, some may argue it is not a part of art. It is.
+ *
+ * @section editing
+ *
+ * Z,X,C,V for different types of RESIZING \n
+ * N,M     for SWITCHING between images \n
+ * B       for RELOADING the image with initial setting \n
+ * K,L     for increasing/decreasing LIGHT for the current image \n
+ * W,A,S,D for MOVING the current image \n
+ * F       for DELETING the image \n
+ * G,H     for SWAPPING the image with previous/next one \n
+ * I       for INVERTING the colors \n
+ * O,P     for changing the PALLETE \n
+ * U       for PLAY/STOP \n
+ * Y       for changing the DIRECTION of playing \n
+ */
 
 #include <iostream>
 #include <string>
