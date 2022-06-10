@@ -1,5 +1,9 @@
+#include <map>
+
 #include "CFormatBMP.hpp"
 #include "CFormatTGA.hpp"
+
+#pragma once
 
 using namespace std;
 

@@ -12,18 +12,26 @@
 #include <chrono>
 
 #include "CGallery.hpp"
+#include "CCommandLine.hpp"
+#include "CFlags.hpp"
 
 using namespace std;
 
 int main ( int argc, char ** argv )
 {
     cout << "main {" << endl;
-    vector<string> paths = {"assets/img/3x3.bmp", "assets/img/10x3.bmp"};
-    // vector<string> paths = {"assets/img/3x3.bmp"};
-    
-    cout << "check" << endl;
-
-    CGallery gal( paths );
+    CCommandLine cmd( argc, argv );
+    CFlags flags;
+    cmd.processCommands( flags );
+    vector<string> paths = cmd.handoverImgs();
+    try
+    {
+        CGallery gal( paths, flags );
+    }
+    catch( ... )
+    {
+       cout << "failed" << endl;
+    }
 
     cout << "} main" << endl;
     return 0;

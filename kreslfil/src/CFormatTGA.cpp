@@ -4,27 +4,34 @@
 #include <iomanip>
 #include <fstream>
 
-#include "CFormatBMP.hpp"
+#include "CFormatTGA.hpp"
 #include "CFlags.hpp"
 
-vector<uint8_t> CFormatBMP::load ( const string & filename, CFlags & rflags )
+using namespace std;
+vector<uint8_t> CFormatTGA::load ( const string & filename, CFlags & rflags )
 {
-    // cout << "bmp 1 " << endl;
     fstream f ( filename, ios::in | ios::binary );
     if ( !f.is_open () ) 
         throw invalid_argument ( "File Not Found" );
-    
-    int fileHeaderSize = 14;
+
+    int fileHeaderSize = 18;
+    f.seekg ( 0, ios::beg );
+    streampos beg = f.tellg();
+    f.seekg ( 0, ios::end );
+    streampos end = f.tellg();
+    int fileSize = end - beg - fileHeaderSize;
+    f.seekg ( 0, ios::beg );
+
     vector<uint8_t> fileHeader ( fileHeaderSize );
     f.read ( reinterpret_cast<char*> ( fileHeader.data() ), fileHeaderSize);
     if ( !f )
         throw invalid_argument ( "Error while reading" );
 
-    int fileSize = fileHeader[2]  + (fileHeader[3]  << 8) + (fileHeader[4]  << 16) + (fileHeader[5]  << 24);
-    int index    = fileHeader[10] + (fileHeader[11] << 8) + (fileHeader[12] << 16) + (fileHeader[13] << 24);
+    int width  = fileHeader[12] + ( fileHeader[13] << 8 );
+    int height = fileHeader[14] + ( fileHeader[15] << 8 );
+    int index  = 0;
 
-    f.seekg ( 0, ios::beg );
-
+    vector<uint8_t> buffer;
     m_buffer.resize( fileSize );
     f.read ( reinterpret_cast<char*> ( m_buffer.data() ), fileSize);
     if ( !f )
@@ -32,19 +39,14 @@ vector<uint8_t> CFormatBMP::load ( const string & filename, CFlags & rflags )
 
     f.close();
 
-    int width  = m_buffer[18] + (m_buffer[19] << 8) + (m_buffer[20] << 16) + (m_buffer[21] << 24);
-    int height = m_buffer[22] + (m_buffer[23] << 8) + (m_buffer[24] << 16) + (m_buffer[25] << 24);
     CPixelMap pixMap( height, width );
 
     fillPixelMap( width, height, index, pixMap );
-
-    // init( bdoStretch );
     return pixMap.getGreyPixels();
 }
-void CFormatBMP::fillPixelMap ( int width, int height, int index, CPixelMap & rpixMap ) 
+void CFormatTGA::fillPixelMap ( int width, int height, int index, CPixelMap & rpixMap )
 {
-    int paddingAmount = ( ( 4 - (width*3) % 4 ) % 4 );
-    for (int h = height - 1; h >= 0; h--)
+    for (int h = 0; h < height; h++)
     {
         for (int w = 0; w < width; w++)
         {
@@ -55,11 +57,9 @@ void CFormatBMP::fillPixelMap ( int width, int height, int index, CPixelMap & rp
             index++;
             pix.r = (float) m_buffer[index];
             index++;
-            pix.a = (float) m_buffer[index];
-            index++;
+            pix.a = 255;
             rpixMap.setPixels( h * width + w, pix );
         }
     }
-    index += paddingAmount;
     rpixMap.convertToGray();
 }

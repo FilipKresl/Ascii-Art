@@ -1,5 +1,7 @@
 using namespace std;
 
+#pragma once
+
 class CImage
 {
 public:
@@ -14,7 +16,7 @@ public:
         {
             cout << dec << setfill('0') << setw(2) << (int) m_grayPixels[i] << endl;
         }
-        cout << setfill('-') << setw(20) << endl;
+        cout << "--------" << endl;
     }
 private:
     vector<uint8_t> m_grayPixels;
