@@ -9,7 +9,13 @@ class CGallery
 public:
     CGallery( vector<string> & paths, CFlags & rflags );
     ~CGallery();
-
+    void incIndex();
+    void decIndex();
+    void deleteImg();
+    void moveImgForward();
+    void moveImgBack();
+    CImage * getImage();
 private:
+    int m_index;
     vector<CImage  *> m_images;
 };

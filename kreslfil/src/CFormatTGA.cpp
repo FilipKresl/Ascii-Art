@@ -8,7 +8,7 @@
 #include "CFlags.hpp"
 
 using namespace std;
-vector<uint8_t> CFormatTGA::load ( const string & filename, CFlags & rflags )
+CPixelMap CFormatTGA::load ( const string & filename, CFlags & rflags )
 {
     fstream f ( filename, ios::in | ios::binary );
     if ( !f.is_open () ) 
@@ -42,7 +42,7 @@ vector<uint8_t> CFormatTGA::load ( const string & filename, CFlags & rflags )
     CPixelMap pixMap( height, width );
 
     fillPixelMap( width, height, index, pixMap );
-    return pixMap.getGreyPixels();
+    return pixMap;
 }
 void CFormatTGA::fillPixelMap ( int width, int height, int index, CPixelMap & rpixMap )
 {

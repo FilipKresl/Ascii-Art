@@ -1,3 +1,5 @@
+#include "CPixelMap.hpp"
+
 using namespace std;
 
 #pragma once
@@ -5,19 +7,14 @@ using namespace std;
 class CImage
 {
 public:
-    CImage( vector<uint8_t> grayPixels )
-    {
-        m_grayPixels = grayPixels;
-        // dumpPixels();
-    }
-    void dumpPixels()
-    {
-        for (int i = 0; i < m_grayPixels.size(); i++)
-        {
-            cout << dec << setfill('0') << setw(2) << (int) m_grayPixels[i] << endl;
-        }
-        cout << "--------" << endl;
-    }
-private:
+    CImage( CPixelMap pixMap );
+    void dumpPixels();
+    size_t getWidth();
+    size_t getHeight();
+    vector<uint8_t> getGrayPixels();
+
+protected:
+    size_t m_width;
+    size_t m_height;
     vector<uint8_t> m_grayPixels;
 };
