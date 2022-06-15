@@ -41,6 +41,7 @@ bool CCommandLine::processCommands ( CFlags & rflags )
             rflags.m_outputIndex = 1;
             break;
         default:
+            return false;
             break;
         }
     }

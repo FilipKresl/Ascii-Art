@@ -22,11 +22,11 @@ void CMessages::printHelp()
     printw ( "  -r for output in round Ascii (e.g. o80@) (default) \n" );
     printw ( "  -s for output in sharp Ascii (e.g. -/I#) \n\n" );
     printw ( "examples: \n" );
-    printw ( "  ./a.out img/johnny.bmp \n" );
-    printw ( "  ./a.out img/albert.tga \n" );
-    printw ( "  ./a.out -l palleteNumbers.txt img/cat2.bmp img/cat.bmp \n" );
-    printw ( "  ./a.out -l palletePerfect.txt img/cat2.bmp img/cat.bmp \n" );
-    printw ( "  ./a.out -s -p img/img*.bmp \n\n" );
+    printw ( "  ./kreslfil assets/img/johnny.bmp \n" );
+    printw ( "  ./kreslfil assets/img/albert.tga \n" );
+    printw ( "  ./kreslfil -l assets/palleteNumbers.txt assets/img/cat2.bmp assets/img/cat.bmp \n" );
+    printw ( "  ./kreslfil -l assets/palletePerfect.txt assets/img/cat2.bmp assets/img/cat.bmp \n" );
+    printw ( "  ./kreslfil -s -p assets/img/img*.bmp \n\n" );
     printw ( "editing: \n" );
     printw ( "  Z,X,C,V for different types of RESIZING \n" );
     printw ( "  N,M     for SWITCHING between images \n" );

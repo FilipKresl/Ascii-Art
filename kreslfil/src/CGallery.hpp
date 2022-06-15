@@ -16,6 +16,6 @@ public:
     void moveImgBack();
     CImage * getImage();
 private:
-    int m_index;
+    size_t m_index;
     vector<CImage  *> m_images;
 };

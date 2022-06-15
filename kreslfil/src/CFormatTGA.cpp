@@ -38,10 +38,11 @@ CPixelMap CFormatTGA::load ( const string & filename, CFlags & rflags )
         throw invalid_argument ( "Error while reading" );
 
     f.close();
-
     CPixelMap pixMap( height, width );
-
     fillPixelMap( width, height, index, pixMap );
+
+    if ( rflags.m_stretch )
+        stretch( pixMap );
     return pixMap;
 }
 void CFormatTGA::fillPixelMap ( int width, int height, int index, CPixelMap & rpixMap )

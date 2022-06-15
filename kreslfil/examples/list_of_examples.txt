@@ -1,9 +1,6 @@
-compiler:
-cd src; clear; g++ -Wall -pedantic main.cpp -lncurses
-
 interesting launches:
 ./kreslfil assets/img/johnny.bmp
 ./kreslfil assets/img/albert.tga
-./kreslfil -l palleteNumbers.txt assets/img/cat2.bmp img/cat.bmp
-./kreslfil -l palletePerfect.txt assets/img/cat2.bmp img/cat.bmp
+./kreslfil -l assets/palleteNumbers.txt assets/img/cat2.bmp img/cat.bmp
+./kreslfil -l assets/palletePerfect.txt assets/img/cat2.bmp img/cat.bmp
 ./kreslfil -s -p assets/img/img*.bmp

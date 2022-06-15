@@ -14,7 +14,7 @@ CImage::CImage( CPixelMap pixMap  )
 }
 void CImage::dumpPixels()
 {
-    for (int i = 0; i < m_grayPixels.size(); i++)
+    for (size_t i = 0; i < m_grayPixels.size(); i++)
     {
         cout << dec << setfill('0') << setw(2) << (int) m_grayPixels[i] << endl;
     }

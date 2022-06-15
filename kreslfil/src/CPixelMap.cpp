@@ -19,7 +19,7 @@ void CPixelMap::setPixels( int i, rgba pix )
 }
 void CPixelMap::dumpPixels() 
 {
-    for (int i = 0; i < m_pixels.size(); i++)
+    for (size_t i = 0; i < m_pixels.size(); i++)
     {
         cout << hex << 
         setfill('0') << setw(2) << (int) m_pixels[i].r << " " << 
