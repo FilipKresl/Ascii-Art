@@ -1,7 +1,0 @@
-<map id="main" name="main">
-<area shape="rect" id="node1" title="MAIN." alt="" coords="5,81,60,108"/>
-<area shape="rect" id="node2" href="$classCCommandLine.html#a6b8aa11d363dbc49428dde8901474278" title="getter if a error has been detected" alt="" coords="144,5,329,32"/>
-<area shape="rect" id="node3" href="$classCCommandLine.html#a2e96179da49bb66d5a8ebb91d25ad924" title="getter for a member vector containing paths to all given files" alt="" coords="123,56,350,83"/>
-<area shape="rect" id="node4" href="$classCCommandLine.html#aeef753a3f7959c9c997db7640eb465e8" title="loads user&#39;s pallete from a file" alt="" coords="134,107,339,133"/>
-<area shape="rect" id="node5" href="$classCCommandLine.html#aafee89e370c1cab64562d66d5c85c6a8" title="set propre flags for parsed commands" alt="" coords="108,157,365,184"/>
-</map>

@@ -57,7 +57,8 @@ string CCommandLine::loadPallete( vector<string> & rpaths )
     ifstream f ( pathPallete );
     if ( !f.is_open () ) 
         return "";
-    while ( getline ( f, pallete ) ) {}
+    // while ( getline ( f, pallete ) ) {}
+    getline ( f, pallete );
     f.close();
     return pallete;
 }
