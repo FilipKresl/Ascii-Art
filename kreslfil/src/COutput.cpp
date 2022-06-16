@@ -35,7 +35,7 @@ void COutput::smallerPallete()
     if ( m_pal - 2 < m_palletes.size() ) 
         m_pal -= 2;
 }
-char COutput::convertAscii ( int index )
+char COutput::convertAscii ( const int index ) const
 {
     int charSize = 256;
     size_t palSize = m_palletes[m_pal].size();
@@ -167,7 +167,7 @@ void COutput::lightDown()
             m_grays[i] = 0;
     }
 }
-void COutput::setResizeMod( int x )
+void COutput::setResizeMod( const int x )
 {
     if ( x >= 0 && x <= 4 )
         m_resizeMode = x;
@@ -196,4 +196,8 @@ void COutput::resize ( int newHeight, int newWidth, double x_ratio, double y_rat
     m_width = newWidth;
     m_height = newHeight;
     m_grays = newGrays;   
+}
+vector<uint8_t> COutput::getGrays() const
+{
+    return m_grays;
 }

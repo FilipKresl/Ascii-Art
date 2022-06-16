@@ -1,8 +1,10 @@
 /**
  * @file COutputRound.hpp
- * @brief file for derived COutput class COutputRound.hpp
+ * @brief file for derived COutput class COutputRound
  */
 #include "COutput.hpp"
+
+#pragma once
 
 /**
  * @brief derived class for printing in round-shaped chars

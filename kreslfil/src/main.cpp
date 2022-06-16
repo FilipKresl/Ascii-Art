@@ -61,6 +61,7 @@
 #include "COutputRound.hpp"
 #include "COutputSharp.hpp"
 #include "CEffectManager.hpp"
+#include "CTests.hpp"
 
 using namespace std;
 
@@ -72,6 +73,13 @@ using namespace std;
  */
 int main ( int argc, char ** argv )
 {
+    bool debug = false;
+    if ( debug )
+    {
+        CTests();
+        return 0;
+    }
+
     CMessages mes;
     if ( argc < 2 )
     {
@@ -127,7 +135,7 @@ int main ( int argc, char ** argv )
             char c = tolower( getch() );
             efMan.processEffect( c, pout, flags, gal );
 
-            if ( flags.m_play )
+            if ( flags.m_play)
                 this_thread::sleep_for(chrono::milliseconds(100));
         }
         delete pout;

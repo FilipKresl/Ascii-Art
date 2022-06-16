@@ -39,7 +39,7 @@ CPixelMap CFormatBMP::load ( const string & filename, CFlags & rflags )
         stretch( pixMap );
     return pixMap;
 }
-void CFormatBMP::fillPixelMap( int width, int height, int index, CPixelMap & rpixMap ) 
+void CFormatBMP::fillPixelMap( const int width, const int height, int index, CPixelMap & rpixMap )
 {
     int paddingAmount = ( ( 4 - (width*3) % 4 ) % 4 );
     for (int h = height - 1; h >= 0; h--)

@@ -23,22 +23,22 @@ public:
     /**
      * @brief debug print pixels
      */
-    void dumpPixels();
+    void dumpPixels() const;
     /**
      * @brief get the width of an image
      * @return size_t width of an image
      */
-    size_t getWidth();
+    size_t getWidth() const;
     /**
      * @brief get the height of an image
      * @return size_t height of an image
      */
-    size_t getHeight();
+    size_t getHeight() const;
     /**
      * @brief give access to grayscale pixels of an image
      * @return vector<uint8_t> containing pixels translated to grayscale values
      */
-    vector<uint8_t> getGrayPixels();
+    vector<uint8_t> getGrayPixels() const;
 
 protected:
     size_t m_width;

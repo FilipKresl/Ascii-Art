@@ -1,6 +1,6 @@
 /**
  * @file CCommandLine.hpp
- * @brief processes everything given by the user when launched
+ * @brief file for class CCommandLine, processes everything given during lauch by the user 
  */
 
 #include <iostream>
@@ -33,7 +33,7 @@ public:
      * @return true -> continue
      * @return false -> -h has been loaded
      */
-    bool processCommands ( CFlags & rflags );
+    bool processCommands ( CFlags & rflags ) const;
      /**
      * @brief loads user's pallete from a file
      * 
@@ -46,19 +46,19 @@ public:
      * 
      * @return vector<string> filled with paths to every given file
      */
-    vector<string> handoverImgs();
+    vector<string> handoverImgs() const;
     /**
      * @brief debug dump of all argumentes 
      */
-    void dumpLine();
+    void dumpLine() const;
     /**
      * @brief debug dump of all file_names and commands
      */
-    void dumpIaC();
+    void dumpIaC() const;
     /**
      * @brief getter if a error has been detected
      */
-    bool getError();
+    bool getError() const;
     
 private:
     /**
@@ -71,15 +71,15 @@ private:
      * @param path path to a file
      * @return extension as a string 
      */
-    string getExt( string path );
+    string getExt( const string path );
     /**
      * @brief stores file to a member vector for later use
      */
-    void storeFile ( int i );
+    void storeFile ( const int i );
     /**
      * @brief stores command to a member vector for later use
      */
-    void storeCommand ( int i );
+    void storeCommand ( const int i );
 
 private:
     int             m_argc; 

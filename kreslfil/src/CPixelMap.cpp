@@ -7,17 +7,17 @@
 
 using namespace std;
 
-CPixelMap::CPixelMap ( int height, int width )
+CPixelMap::CPixelMap ( const int height, const int width )
 {
     m_height = height;
     m_width  = width;
     m_pixels.resize( m_height * m_width );
 }
-void CPixelMap::setPixels( int i, rgba pix ) 
+void CPixelMap::setPixels( const int i, const rgba pix ) 
 {
     m_pixels[ i ] = pix;
 }
-void CPixelMap::dumpPixels() 
+void CPixelMap::dumpPixels() const
 {
     for (size_t i = 0; i < m_pixels.size(); i++)
     {
@@ -38,15 +38,15 @@ void CPixelMap::convertToGray()
         m_grayPixels.push_back( sum );
     } 
 }
-size_t CPixelMap::getWidth()
+size_t CPixelMap::getWidth() const
 {
     return m_width;
 }
-size_t CPixelMap::getHeight()
+size_t CPixelMap::getHeight() const
 {
     return m_height;
 }
-vector<uint8_t> CPixelMap::getGrayPixels()
+vector<uint8_t> CPixelMap::getGrayPixels() const
 {
     return m_grayPixels;
 }
@@ -54,11 +54,11 @@ vector<uint8_t> & CPixelMap::getGrayPixelsRef()
 {
     return m_grayPixels;
 }
-void CPixelMap::setHeight( int newHeight )
+void CPixelMap::setHeight( const int newHeight )
 {
     m_height = newHeight;
 }
-void CPixelMap::setGrayPixels( vector<uint8_t> newGrayPixels )
+void CPixelMap::setGrayPixels( const vector<uint8_t> newGrayPixels )
 {
     m_grayPixels = newGrayPixels;
 }

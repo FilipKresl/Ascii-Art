@@ -17,7 +17,6 @@ using namespace std;
             delete it->second;
         }
     }
-    // const CFormat * getFormat ( const string & filename ) const
     CFormat * CFormatManager::getFormat ( const string & filename ) const
     {
         string extension = getExt( filename );

@@ -30,6 +30,6 @@ public:
     virtual CPixelMap load ( const string & filename, CFlags & rflags ) = 0;
 protected:
     virtual void fillPixelMap ( int width, int height, int index, CPixelMap & rpixMap ) = 0;
-    void stretch( CPixelMap & rpixMap );
+    void stretch( CPixelMap & rpixMap ) const;
     vector<uint8_t> m_buffer;
 };

@@ -52,7 +52,7 @@ public:
      * @param index which pixel should be read
      * @return char converted ascii-char ready for printing 
      */
-    char convertAscii ( int index );
+    char convertAscii ( const int index ) const;
     /**
      * @brief reads and stores values of an image for faster manipulation of effects
      * @param pimg pointer to an image
@@ -82,7 +82,7 @@ public:
      * @brief which resize method should be called every time
      * @param x key to specific resize method
      */
-    void setResizeMod( int x );
+    void setResizeMod( const int x );
     /**
      * @brief moves the image up by 1 pixel
      */
@@ -118,6 +118,10 @@ public:
      * @param palette string containg chars for output print
      */
     void setPallete( string palette );
+    /**
+     * @brief get grayscale pixels
+     */
+    vector<uint8_t> getGrays() const;
     
 protected:
     void resize ( int newHeight, int newWidth, double x_ratio, double y_ratio );

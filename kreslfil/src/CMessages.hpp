@@ -15,14 +15,14 @@ public:
     /**
      * @brief initializes screen for ncurses
      */
-    void ncursInit();
+    void ncursInit() const;
     /**
      * @brief prints help message
      */
-    void printHelp();
+    void printHelp() const;
     /**
      * @brief prints error message
      */
-    void printError();
+    void printError() const;
 };
 

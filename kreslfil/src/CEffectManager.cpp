@@ -7,7 +7,8 @@
 
 using namespace std;
 
-void CEffectManager::processEffect( char c, COutput * pout, CFlags & rflags, CGallery & rgal )
+void CEffectManager::processEffect( const char c, COutput * pout, 
+                                    CFlags & rflags, CGallery & rgal )
 {
     switch ( c )
     {
@@ -116,7 +117,7 @@ void CEffectManager::processEffect( char c, COutput * pout, CFlags & rflags, CGa
     refresh();
 } 
 
-void CEffectManager::play( COutput * pout, CGallery & rgal, CFlags & rflags )
+void CEffectManager::play( COutput * pout, CGallery & rgal, CFlags & rflags ) const
 {
     nodelay(stdscr, TRUE);
     // if next or previous image should be loaded

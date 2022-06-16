@@ -1,6 +1,6 @@
 /**
  * @file CFlags.hpp
- * @brief file for class CFlag, contains boolean member variables called flags
+ * @brief file for class CFlags, contains boolean member variables called flags
  */
 
 #pragma once

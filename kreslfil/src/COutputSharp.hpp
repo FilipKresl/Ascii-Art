@@ -1,8 +1,10 @@
 /**
  * @file COutputSharp.hpp
- * @brief file for derived COutput class COutputSharp.hpp
+ * @brief file for derived COutput class COutputSharp
  */
 #include "COutput.hpp"
+
+#pragma once
 
 /**
  * @brief derived class for printing in sharp-shaped chars

@@ -1,5 +1,5 @@
 /**
- * @file CPixelMap.cpp
+ * @file CPixelMap.hpp
  * @brief file for class CPixelMap that contains data of an image
  */
 #include <iostream>
@@ -23,17 +23,17 @@ public:
      * @param height height of an image
      * @param width width of an image
      */
-    CPixelMap ( int height, int width );
+    CPixelMap ( const int height, const int width );
     /**
      * @brief stores specific pixel info
      * @param i to which index should be stored
      * @param pix rgba valued pixel
      */
-    void setPixels( int i, rgba pix );
+    void setPixels( const int i, const rgba pix );
     /**
      * @brief debug print pixels
      */
-    void dumpPixels();
+    void dumpPixels() const;
     /**
      * @brief convert every colorful pixel to a grayscale one by exact ratio
      */
@@ -42,17 +42,17 @@ public:
      * @brief get the width object
      * @return size_t the width object
      */
-    size_t getWidth();
+    size_t getWidth() const;
     /**
      * @brief get the height object
      * @return size_t the height object
      */
-    size_t getHeight();
+    size_t getHeight() const;
     /**
      * @brief get copy of grayscale pixels of an image
      * @return vector<uint8_t> grayscale pixels of an image
      */
-    vector<uint8_t> getGrayPixels();
+    vector<uint8_t> getGrayPixels() const;
     /**
      * @brief get reference to grayscale pixels of an image
      * @return vector<uint8_t> grayscale pixels of an image
@@ -62,12 +62,12 @@ public:
      * @brief set the height object
      * @param newHeight new height of an image
      */
-    void setHeight( int newHeight );
+    void setHeight( const int newHeight );
     /**
      * @brief set grayscale pixels of an image
      * @param newGrayPixels new grayscale pixels
      */
-    void setGrayPixels( vector<uint8_t> newGrayPixels );
+    void setGrayPixels( const vector<uint8_t> newGrayPixels );
 private:
     size_t m_width;
     size_t m_height;

@@ -15,7 +15,7 @@ CCommandLine::CCommandLine ( int argc, char** argv )
     m_argv = argv;
     parse();
 }
-bool CCommandLine::processCommands ( CFlags & rflags )
+bool CCommandLine::processCommands ( CFlags & rflags ) const
 {
     for (size_t i = 0; i < m_commands.size(); i++)
     {
@@ -47,7 +47,7 @@ bool CCommandLine::processCommands ( CFlags & rflags )
     }
     return true;
 }
-string CCommandLine::loadPallete( vector<string> & rpaths )
+string CCommandLine::loadPallete( vector<string> & rpaths ) 
 {
     if ( rpaths.size() == 0 || getExt( rpaths[0]) != "txt" )
         return "";
@@ -57,28 +57,27 @@ string CCommandLine::loadPallete( vector<string> & rpaths )
     ifstream f ( pathPallete );
     if ( !f.is_open () ) 
         return "";
-    // while ( getline ( f, pallete ) ) {}
-    getline ( f, pallete );
+    while ( getline ( f, pallete ) ) {}
     f.close();
     return pallete;
 }
-vector<string> CCommandLine::handoverImgs()
+vector<string> CCommandLine::handoverImgs() const
 {
     return m_imgs;
 }
-void CCommandLine::dumpLine()
+void CCommandLine::dumpLine() const
 {
     for (int i = 1; i < m_argc; i++)
         cout << m_argv[i] << endl;
 }
-void CCommandLine::dumpIaC()
+void CCommandLine::dumpIaC() const
 {
     for (size_t i = 0; i < m_imgs.size(); i++)
         cout << m_imgs[i] << endl;;
     for (size_t i = 0; i < m_commands.size(); i++)
         cout << m_commands[i] << endl;;
 }
-bool CCommandLine::getError()
+bool CCommandLine::getError() const
 {
     return m_error;
 }
@@ -93,7 +92,7 @@ void CCommandLine::parse()
             storeFile( i );
     }
 }
-string CCommandLine::getExt( string path )
+string CCommandLine::getExt( const string path )
 {
     size_t i = path.rfind ( '.', path.size() );
     if ( i != string::npos ) 
@@ -102,13 +101,13 @@ string CCommandLine::getExt( string path )
     }
     return string ( "" );
 }
-void CCommandLine::storeFile ( int i )
+void CCommandLine::storeFile ( const int i )
 {
     string s;
     s = m_argv[i];
     m_imgs.push_back( s );
 }
-void CCommandLine::storeCommand ( int i )
+void CCommandLine::storeCommand ( const int i )
 {
     m_commands.push_back( m_argv[i][1] );
     if ( m_argv[i][1] == '\0' || m_argv[i][2] != '\0' )

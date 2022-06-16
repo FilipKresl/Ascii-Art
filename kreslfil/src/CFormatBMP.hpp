@@ -25,5 +25,5 @@ public:
     CPixelMap load ( const string & filename, CFlags & rflags ) override;
     
 private:
-    void fillPixelMap ( int width, int height, int index, CPixelMap & rpixMap ) override;
+    void fillPixelMap ( const int width, const int height, int index, CPixelMap & rpixMap ) override;
 };

@@ -4,13 +4,13 @@
 
 using namespace std;
 
-void CMessages::ncursInit()
+void CMessages::ncursInit() const
 {
     initscr();
     cbreak();
     noecho();
 }
-void CMessages::printHelp()
+void CMessages::printHelp() const
 {
     ncursInit();
     printw ( "--HELP-- \n" );
@@ -44,7 +44,7 @@ void CMessages::printHelp()
     getch();
     endwin();
 }
-void CMessages::printError()
+void CMessages::printError() const
 {        
     ncursInit();
     printw( "--WRONG INPUT--\n" );

@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void CFormat::stretch( CPixelMap & rpixMap )
+void CFormat::stretch( CPixelMap & rpixMap ) const
 {
     int width = rpixMap.getWidth();
     int height = rpixMap.getHeight();

@@ -1,6 +1,13 @@
 interesting launches:
+
+make runExample01
+make runExample02
+make runExample03
+make runExample04
+make runExample05
+
 ./kreslfil assets/img/johnny.bmp
 ./kreslfil assets/img/albert.tga
-./kreslfil -l assets/palleteNumbers.txt assets/img/cat2.bmp img/cat.bmp
-./kreslfil -l assets/palletePerfect.txt assets/img/cat2.bmp img/cat.bmp
+./kreslfil -l assets/palleteNumbers.txt assets/img/cat2.bmp assets/img/cat.bmp
+./kreslfil -l assets/palletePerfect.txt assets/img/cat2.bmp assets/img/cat.bmp
 ./kreslfil -s -p assets/img/img*.bmp

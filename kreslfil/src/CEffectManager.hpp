@@ -24,8 +24,8 @@ public:
      * @param rflags reference to a class containing flags
      * @param rgal reference to a CGallery instance
      */
-    void processEffect( char c, COutput * pout, CFlags & rflags, CGallery & rgal );
+    void processEffect( const char c, COutput * pout, CFlags & rflags, CGallery & rgal );
 
 private:
-    void play( COutput * pout, CGallery & rgal, CFlags & rflags );
+    void play( COutput * pout, CGallery & rgal, CFlags & rflags ) const;
 };
